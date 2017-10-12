@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Project {
@@ -21,8 +22,12 @@ public class Project {
 
 	@ManyToOne
 	private User seller;
+	@NotNull
+	private String description;
+	@NotNull
 	private BillingType billingType;
 	private int startingBid;
+	@NotNull
 	private LocalDateTime deadline;
 	
 	
@@ -42,6 +47,14 @@ public class Project {
 
 	public void setSeller(User seller) {
 		this.seller = seller;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public BillingType getBillingType() {

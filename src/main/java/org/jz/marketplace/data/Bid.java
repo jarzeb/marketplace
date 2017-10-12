@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -32,9 +31,7 @@ public class Bid {
 	@NotNull
 	private Integer amount;
 	
-	@CreatedDate
-	private LocalDateTime bidDateTime;
-	
+	private LocalDateTime bidDateTime = LocalDateTime.now();
 	
 	public Bid() {}
 

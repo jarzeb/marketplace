@@ -21,7 +21,7 @@ public class SampleData {
 
 		initialUsers = new ArrayList<>();
 
-		User u = new User("adam");
+		User u = new User("anna");
 		u.setBuyer(true);
 		initialUsers.add(u);
 
@@ -46,8 +46,17 @@ public class SampleData {
 		Project p = new Project();
 		p.setBillingType(BillingType.FIXED);
 		p.setDeadline(LocalDateTime.of(2017, 10, 25, 13, 30));
-		p.setSeller(getUsers().get(0));
-		p.setStartingBid(100);
+		p.setSeller(getUsers().get(2));
+		p.setStartingBid(1000);
+		p.setDescription("Paint my house.");
+		initialProjects.add(p);
+
+		p = new Project();
+		p.setBillingType(BillingType.HOURLY);
+		p.setDeadline(LocalDateTime.of(2017, 11, 02, 11, 10));
+		p.setSeller(getUsers().get(2));
+		p.setStartingBid(9999);
+		p.setDescription("Wash my car.");
 		initialProjects.add(p);
 
 		return initialProjects;
@@ -60,9 +69,16 @@ public class SampleData {
 		initialBids = new ArrayList<>();
 
 		Bid b = new Bid();
-		b.setAmount(90);
+		b.setAmount(1001);
 		b.setBidDateTime(LocalDateTime.of(2017,10,20,15,00));
-		b.setBuyer(getUsers().get(1));
+		b.setBuyer(getUsers().get(2));
+		b.setProject(getProjects().get(0));
+		initialBids.add(b);
+		
+		b = new Bid();
+		b.setAmount(1002);
+		b.setBidDateTime(LocalDateTime.of(2017,10,10,13,00));
+		b.setBuyer(getUsers().get(2));
 		b.setProject(getProjects().get(0));
 		initialBids.add(b);
 
