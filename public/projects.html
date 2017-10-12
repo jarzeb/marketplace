@@ -1,0 +1,16 @@
+<!doctype html>
+<html ng-app="marketplace">
+	<head>
+		<title>Marketplace</title>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> -->
+		<script src="angular.min.js"></script>
+    	<script src="projects.js"></script>
+	</head>
+
+	<div ng-controller="marketplace">
+		<table>
+		<tr><th>Project List</b></th></tr>
+		<tr ng-repeat="p in projects">
+			<td>{{p.billingType}}</td><td>{{p.seller.username}}</td><td>{{p.description}}</td>
+		</tr>
+</html>

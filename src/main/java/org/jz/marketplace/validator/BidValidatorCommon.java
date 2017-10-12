@@ -1,5 +1,6 @@
-package org.jz.marketplace.data;
+package org.jz.marketplace.validator;
 
+import org.jz.marketplace.data.Bid;
 import org.springframework.validation.Validator;
 
 public abstract class BidValidatorCommon implements Validator {

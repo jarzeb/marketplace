@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProjectController {
 
-	@RequestMapping("/project")
+	@RequestMapping("/projectdetails")
 	public User user(@RequestParam(value="username") String username) {
 		return null;  
 	}

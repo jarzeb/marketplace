@@ -1,4 +1,4 @@
-package org.jz.marketplace;
+package org.jz.marketplace.util;
 
 import java.util.Arrays;
 import java.util.List;

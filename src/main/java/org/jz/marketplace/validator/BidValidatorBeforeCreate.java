@@ -1,5 +1,8 @@
-package org.jz.marketplace.data;
+package org.jz.marketplace.validator;
 
+import org.jz.marketplace.data.Bid;
+import org.jz.marketplace.data.Project;
+import org.jz.marketplace.data.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 

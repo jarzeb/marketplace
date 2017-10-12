@@ -1,19 +1,27 @@
 <!doctype html>
-<html ng-app="marketplace">
+<html>
 	<head>
 		<title>Marketplace</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    	<script src="projects.js"></script>
 	</head>
 
 	<body>
-		<div ng-controller="marketplace">
-			<br>Element 0 is {{projects[0].description}}
-			<br>Element 1 is {{projects[1].description}}
-			<br><br><b>List:</b>
-			<div ng-repeat="p in projects">
-    			- {{p.description}}
-			</div>
-		</div>
+	
+	<table>
+		<tr><th colspan=3>Welcome to the Marketplace</th></tr>
+		<tr/>
+		<tr><th>Seller Menu</th>						<th width=100/><th>Buyer Menu</th></tr>
+		<tr/>
+		<tr><td>View Projects</td>					<td/><td><a href=projects.html target=popup onclick="openProjectWindow();">View/Bid on Projects</a></td></tr>
+		<tr><td>Post a Project</td>						<td/><td>View my Bids</td></tr>
+	</table>
+	
 	</body>
+	
+	
+	<script>
+	function openProjectWindow() {
+		window.open('projects.html','View/Bid on Projects','width=600,height=400');
+		return false;
+	}
+	</script>
 </html>

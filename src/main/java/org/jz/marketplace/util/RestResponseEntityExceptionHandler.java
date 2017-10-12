@@ -1,4 +1,4 @@
-package org.jz.marketplace.data;
+package org.jz.marketplace.util;
 
 import java.util.HashMap;
 import java.util.List;
