@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.jz.marketplace.dao.ProjectDAO;
-import org.jz.marketplace.data.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;

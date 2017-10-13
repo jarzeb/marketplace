@@ -1,0 +1,47 @@
+<!doctype html>
+<html ng-app="marketplace">
+	<head>
+		<title>Marketplace</title>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> -->
+		<script src="angular.min.js"></script>
+    	<script src="marketplace.js"></script>
+	</head>
+	<style>
+		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
+	</style>
+		<div ng-controller="projectdetail">
+			<table class="default" style="border:1px solid black; text-align:center;">
+				<tr><th colspan=6 style="background:lightblue;">Project List</b></th></tr>
+				<tr>
+				<th>Project #</th>
+				<th width=75>Seller</th>
+				<th width=200>Description</th>
+				<th width=150>Deadline</th>
+				<th width=125>Billing Type</th>
+				</tr>
+				<tr/>
+				<tr style="background:lightgrey;">
+				<td>{{project.projectId}}</td>
+				<td>{{project.sellerName}}</td>
+				<td>{{project.description}}</td>
+				<td>{{project.deadline}}</td>
+				<td>{{project.billingType}}</td>
+				</tr>
+			</table>
+
+			<table class="default" style="border:1px solid black; text-align:center;">
+				<tr><th colspan=6 style="background:lightblue;">Bids List</b></th></tr>
+				<tr><th>Bidder</th>
+				<th>Amount</th>
+				<th>Date/Time</th>
+				<tr/>
+				<tr style="background:lightgrey;" ng-repeat="b in bids">
+				<td>{{b.buyerName}}</td>
+				<td>{{b.amount}}</td>
+				<td>{{b.bidDateTime}}</td>
+				</tr>
+			</table>
+			
+			
+		</div>
+</html>

@@ -57,8 +57,11 @@ public class ProjectDAO {
 			bidMap.put("buyerName", b.getBuyer().getUsername());
 			bidList.add(bidMap);
 		}
-		p.put("bids", bidList);
 		
-		return p;
+		Map<String, Object> result = new HashMap<>();
+		result.put("project", p);
+		result.put("bids", bidList);
+		
+		return result;
 	}
 }
