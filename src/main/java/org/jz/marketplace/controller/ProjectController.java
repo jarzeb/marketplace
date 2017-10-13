@@ -1,5 +1,6 @@
 package org.jz.marketplace.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.jz.marketplace.dao.ProjectDAO;
@@ -13,10 +14,9 @@ public class ProjectController {
 	@Autowired
 	private ProjectDAO projectDao;
 
-	@RequestMapping("/getProjectList")
-	public Map<String,Object> getProjectList() {
-		Map<String,Object> result = projectDao.getProjectList();
-		
+	@RequestMapping("/projectList")
+	public List<Map<String,String>> getProjectList() {
+		List<Map<String,String>> result = projectDao.getProjectList();
 		return result;
 	}
 

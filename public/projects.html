@@ -6,11 +6,27 @@
 		<script src="angular.min.js"></script>
     	<script src="projects.js"></script>
 	</head>
-
-	<div ng-controller="marketplace">
-		<table>
-		<tr><th>Project List</b></th></tr>
-		<tr ng-repeat="p in projects">
-			<td>{{p.billingType}}</td><td>{{p.seller.username}}</td><td>{{p.description}}</td>
-		</tr>
+	<style>
+		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
+	</style>
+		<div ng-controller="marketplace">
+			<table class="default" style="border:1px solid black; text-align:center;">
+				<tr><th colspan=6 style="background:lightblue;">Project List</b></th></tr>
+				<tr><th>Project #</th>
+				<th width=75>Seller</th>
+				<th width=200>Description</th>
+				<th width=150>Deadline</th>
+				<th width=125>Billing Type</th>
+				<th width=125>Current Bid</th></tr>
+				<tr/>
+				<tr style="background:lightgrey;" ng-repeat="p in projects">
+				<td>{{p.projectId}}</td>
+				<td>{{p.sellerName}}</td>
+				<td>{{p.description}}</td>
+				<td>{{p.deadline}}</td>
+				<td>{{p.billingType}}</td>
+				<td>{{p.topBid}}</td>
+				</tr>
+			</table>
+		</div>
 </html>
