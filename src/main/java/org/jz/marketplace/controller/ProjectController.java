@@ -1,16 +1,23 @@
 package org.jz.marketplace.controller;
 
-import org.jz.marketplace.data.User;
+import java.util.Map;
+
+import org.jz.marketplace.dao.ProjectDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ProjectController {
+	
+	@Autowired
+	private ProjectDAO projectDao;
 
-	@RequestMapping("/projectdetails")
-	public User user(@RequestParam(value="username") String username) {
-		return null;  
+	@RequestMapping("/getProjectList")
+	public Map<String,Object> getProjectList() {
+		Map<String,Object> result = projectDao.getProjectList();
+		
+		return result;
 	}
 
 

@@ -30,17 +30,5 @@ public class Marketplace
 	}
 
 	
-    /*
-	@Bean
-	public CommandLineRunner demo(UserRepository repository) {
-		return (args) -> {
-			repository.save(new User("bob"));
-			
-			for(User user : repository.findAll())
-				System.out.println(user.toString());
-		};
-	}
-	*/
-	
 
 }
