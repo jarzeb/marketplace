@@ -1,17 +1,8 @@
-<!doctype html>
-<html ng-app="marketplace">
-	<head>
-		<title>Marketplace</title>
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> -->
-		<script src="angular.min.js"></script>
-    	<script src="marketplace.js"></script>
-	</head>
 	<style>
 		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
 	</style>
-		<div ng-controller="projectdetail">
 			<table class="default" style="border:1px solid black; text-align:center;">
-				<tr><th colspan=6 style="background:lightblue;">Project List</b></th></tr>
+				<tr><th colspan=6 style="background:violet;">Project Detail</b></th></tr>
 				<tr>
 				<th>Project #</th>
 				<th width=75>Seller</th>
@@ -28,20 +19,17 @@
 				<td>{{project.billingType}}</td>
 				</tr>
 			</table>
-
+			<br>
 			<table class="default" style="border:1px solid black; text-align:center;">
-				<tr><th colspan=6 style="background:lightblue;">Bids List</b></th></tr>
+				<tr><th colspan=6 style="background:orange;">Bid List</b></th></tr>
 				<tr><th>Bidder</th>
 				<th>Amount</th>
 				<th>Date/Time</th>
 				<tr/>
 				<tr style="background:lightgrey;" ng-repeat="b in bids">
 				<td>{{b.buyerName}}</td>
-				<td>{{b.amount}}</td>
+				<td>${{b.amount}}</td>
 				<td>{{b.bidDateTime}}</td>
 				</tr>
-			</table>
-			
-			
+			</table>			
 		</div>
-</html>

@@ -71,14 +71,14 @@ public class SampleData {
 		Bid b = new Bid();
 		b.setAmount(1001);
 		b.setBidDateTime(LocalDateTime.of(2017,10,20,15,00));
-		b.setBuyer(getUsers().get(2));
+		b.setBuyer(getUsers().get(1));
 		b.setProject(getProjects().get(0));
 		initialBids.add(b);
 		
 		b = new Bid();
 		b.setAmount(1002);
 		b.setBidDateTime(LocalDateTime.of(2017,10,10,13,00));
-		b.setBuyer(getUsers().get(2));
+		b.setBuyer(getUsers().get(1));
 		b.setProject(getProjects().get(0));
 		initialBids.add(b);
 

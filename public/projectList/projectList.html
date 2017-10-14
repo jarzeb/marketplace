@@ -1,16 +1,7 @@
-<!doctype html>
-<html ng-app="marketplace">
-	<head>
-		<title>Marketplace</title>
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> -->
-		<script src="angular.min.js"></script>
-		<script>angular.module('marketplace', []);</script>
-    	<script src="marketplace.js"></script>
-	</head>
 	<style>
 		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
 	</style>
-		<div ng-controller="projectList">
+		<div>
 			<table class="default" style="border:1px solid black; text-align:center;">
 				<tr><th colspan=6 style="background:lightblue;">Project List</b></th></tr>
 				<tr><th>Project #</th>
@@ -26,8 +17,7 @@
 				<td>{{p.description}}</td>
 				<td>{{p.deadline}}</td>
 				<td>{{p.billingType}}</td>
-				<td><div ng-click="openProjectDetail(p.projectId)"><b><u>Select</u></b></div></td>
+				<td><a href=#!/projectDetail ng-click="openProjectDetail(p.projectId)">Select</a></td>
 				</tr>
 			</table>
 		</div>
-</html>
