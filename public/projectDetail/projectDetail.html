@@ -2,14 +2,14 @@
 		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
 	</style>
 			<table class="default" style="border:1px solid black; text-align:center;">
-				<tr><th colspan=8 style="background:violet;">Project Detail</b></th></tr>
+				<tr><th colspan=8 style="background:violet;">Project</b></th></tr>
 				<tr>
-				<th>#</th>
-				<th width=75>Seller</th>
-				<th width=200>Description</th>
-				<th width=150>Deadline</th>
-				<th width=125>Billing Type</th>
-				<th width=50>Status</th>
+				<th>Project Id</th>
+				<th>Seller</th>
+				<th>Description</th>
+				<th>Deadline</th>
+				<th>Billing Type</th>
+				<th>Status</th>
 				<th>Lowest Bid</th>
 				<th>Buyer Name</th>
 				</tr>
@@ -21,20 +21,21 @@
 				<td>{{project.deadline}}</td>
 				<td>{{project.billingType}}</td>
 				<td>{{project.status}}</td>
-				<td>{{project.lowestBid != null ? '$' + project.lowestBid : ''}}</td>
+				<td>{{project.lowestBid}}</td>
 				<td>{{project.lowestBidUsername}}</td>
 				</tr>
 			</table>
 			<br>
 			<table class="default" style="border:1px solid black; text-align:center;">
-				<tr><th colspan=6 style="background:orange;">Bid List</b></th></tr>
-				<tr><th>Bidder</th>
+				<tr><th colspan=6 style="background:orange;">Bids</b></th></tr>
+				<tr>
+				<th>Bidder</th>
 				<th>Amount</th>
 				<th>Date/Time</th>
 				<tr/>
 				<tr style="background:lightgrey;" ng-repeat="b in bids">
 				<td>{{b.buyerName}}</td>
-				<td>${{b.amount}}</td>
+				<td>{{b.amount}}</td>
 				<td>{{b.bidDateTime}}</td>
 				</tr>
 			</table>

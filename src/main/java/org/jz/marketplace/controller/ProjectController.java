@@ -17,10 +17,16 @@ public class ProjectController {
 	private ProjectService projectService;
 
 	@RequestMapping(value = "/projectList", method = RequestMethod.GET)
-	public List<Map<String,String>> getProjectList() {
-		List<Map<String,String>> result = projectService.getProjectList();
+	public List<Map<String,String>> projectList() {
+		List<Map<String,String>> result = projectService.getProjectList(null);
 		return result;
 	}
+
+	@RequestMapping(value = "/projectListBySeller", method = RequestMethod.GET)
+	public List<Map<String,String>> projectListBySeller(@Param("sellerId") long sellerId) {
+		List<Map<String,String>> result = projectService.getProjectList(sellerId);
+		return result;
+	}	
 	
 	@RequestMapping(value = "/projectDetail", method = RequestMethod.GET)
 	public Map<String,Object> getProjectDetail(@Param("projectId") long projectId) {

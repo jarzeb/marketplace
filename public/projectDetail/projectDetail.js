@@ -11,7 +11,6 @@ app.config(['$routeProvider', function($routeProvider) {
 
 app.controller('ProjectDetailCtrl', ['$scope', '$http', '$route', 'shared', function($scope, $http, $route, shared) {
 	
-	$scope.shared = shared;
 	$scope.projectId = shared.getSharedVariable('projectId');
 	$http.get('/projectDetail?projectId=' + $scope.projectId).
     then(function(response) {

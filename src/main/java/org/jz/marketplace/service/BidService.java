@@ -15,6 +15,7 @@ import org.jz.marketplace.data.Project;
 import org.jz.marketplace.data.ProjectRepository;
 import org.jz.marketplace.data.User;
 import org.jz.marketplace.data.UserRepository;
+import org.jz.marketplace.service.formatter.ProjectFormatter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -66,22 +67,19 @@ public class BidService {
 		
 		List<Bid> bids = bidRepo.findBidsByBuyerOrderByBidDateTimeDesc(buyer);
 		List<Map<String,String>> result = new ArrayList<>();
+		LocalDateTime currentDateTime = LocalDateTime.now();
 		
 		for(Bid b : bids) {
 			Map<String,String> row = new HashMap<>();
 			Project p = b.getProject();
 			Bid lowestBid = p.getLowestBid();
+			row.put("bidId", String.valueOf(b.getBidId()));
+			row.put("buyerName", b.getBuyer().getUsername());
 			row.put("bidDateTime", b.getBidDateTime().toString());
-			row.put("amount", String.valueOf(b.getAmount()));
-			row.put("projectId", String.valueOf(p.getProjectId()));
-			row.put("projectDescription", p.getDescription());
-			row.put("projectDeadline", p.getDeadline().toString());
-			row.put("sellerName", p.getSeller().getUsername());
-			if(lowestBid != null) {
-				row.put("lowestBidAmount", String.valueOf(lowestBid.getAmount()));
-				row.put("lowestBidBuyer", lowestBid.getBuyer().getUsername());
-			}
+			row.put("amount", "$" + String.valueOf(b.getAmount()));
 			row.put("isLowestBid", b.equals(lowestBid) ? "true" : "false");
+			Map<String,String> projectRow = ProjectFormatter.format(p, currentDateTime);
+			row.putAll(projectRow);
 			result.add(row);
 		}
 		

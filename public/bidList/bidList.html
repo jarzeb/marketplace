@@ -1,0 +1,39 @@
+	<style>
+		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
+	</style>
+		<div>
+			<table class="default" style="border:1px solid black; text-align:center;">
+				<tr><th colspan=4 style="background:orange;">Bid<th colspan=9 style="background:violet;">Project</th></tr>
+				<tr>
+				<th>Id</th>
+				<th>Buyer</th>
+				<th>Amount</th>
+				<th>Date/Time</th>
+				<th>Id</th>
+				<th>Seller</th>
+				<th>Description</th>
+				<th>Deadline</th>
+				<th>Billing Type</th>
+				<th>Status</th>
+				<th>Lowest Bid</th>
+				<th>Lowest Bidder</th>
+				<th></th>
+				</tr>
+				<tr/>
+				<tr style="background:{{b.status == 'Active' ? 'lightgrey' : 'grey'}};" ng-repeat="b in bids">
+				<td>{{b.bidId}}</td>
+				<td>{{b.buyerName}}</td>
+				<td>{{b.amount}}</td>
+				<td>{{b.bidDateTime}}</td>
+				<td>{{b.projectId}}</td>
+				<td>{{b.sellerName}}</td>
+				<td>{{b.description}}</td>
+				<td>{{b.deadline}}</td>
+				<td>{{b.billingType}}</td>
+				<td>{{b.status}}</td>
+				<td>{{b.lowestBid}}</td>
+				<td>{{b.lowestBidUsername}}</td>
+				<td><a href=#!/projectDetail ng-click="openProjectDetail(b.projectId)">Open</a></td>
+				</tr>
+			</table>
+		</div>
