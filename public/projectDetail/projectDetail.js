@@ -11,11 +11,18 @@ app.config(['$routeProvider', function($routeProvider) {
 
 app.controller('ProjectDetailCtrl', ['$scope', '$http', 'shared', function($scope, $http, shared) {
 	
-	$http.get('/projectDetail?projectId=' + shared.getSharedVariable('projectId')).
+	$scope.projectId = shared.getSharedVariable('projectId');
+	$http.get('/projectDetail?projectId=' + $scope.projectId).
     then(function(response) {
         $scope.project = response.data.project;
         $scope.bids = response.data.bids;
     });	
 
+	$scope.createBid = function() {
+		  //shared.setVariable('projectId', projectId);
+		  //$scope.projectId = projectId;
+		  //$location.path("/projectDetail");
+		$http.post('/createBid?buyerId=1&projectId=' + $scope.projectId + '&amount=' + $scope.bidAmount);
+	};
 	
 }]);

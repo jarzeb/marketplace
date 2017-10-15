@@ -9,4 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface UserRepository extends CrudRepository<User, Long> {
 
 	List<User> findByUsername(String username);
+	List<User> findTop10ByOrderByUserId();
+	
 }

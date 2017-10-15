@@ -19,5 +19,10 @@
              class="org.jz.marketplace.service.ProjectService">
   		<constructor-arg ref="dataConnectorBean"/>
 	</bean>
+
+	<bean id="UserService" 
+             class="org.jz.marketplace.service.UserService">
+  		<constructor-arg ref="dataConnectorBean"/>
+	</bean>
     
 </beans>
