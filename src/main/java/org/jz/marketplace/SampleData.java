@@ -58,6 +58,14 @@ public class SampleData {
 		p.setStartingBid(9999);
 		p.setDescription("Wash my car.");
 		initialProjects.add(p);
+		
+		p = new Project();
+		p.setBillingType(BillingType.HOURLY);
+		p.setDeadline(LocalDateTime.of(2017, 10, 01, 9, 00));
+		p.setSeller(getUsers().get(1));
+		p.setStartingBid(100);
+		p.setDescription("Do my dishes.");
+		initialProjects.add(p);
 
 		return initialProjects;
 	}

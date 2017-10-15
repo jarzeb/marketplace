@@ -1,5 +1,6 @@
 package org.jz.marketplace.dao;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProjectDAO {
+public class ProjectService {
 
 	@Autowired
 	private ProjectRepository projectRepo;
@@ -21,7 +22,8 @@ public class ProjectDAO {
 	private BidRepository bidRepo;
 	
 	public List<Map<String,String>> getProjectList() {
-		
+
+		LocalDateTime currentDateTime = LocalDateTime.now();
 		List<Map<String,String>> result = new ArrayList<>();
 				
 		for(Project project : projectRepo.findAll()) {
@@ -31,6 +33,18 @@ public class ProjectDAO {
 			row.put("description", project.getDescription());
 			row.put("deadline", project.getDeadline().toString());
 			row.put("billingType", project.getBillingType().name());
+			String bgColor;
+			String status;
+			if(isProjectActive(project.getDeadline(), currentDateTime)) {
+				bgColor = "lightgray";
+				status = "Active";
+			} else {
+				bgColor = "gray";
+				status = "Closed";
+			}
+			row.put("bgColor", bgColor);
+			row.put("status", status);
+
 			result.add(row);
 		}
 		
@@ -57,11 +71,14 @@ public class ProjectDAO {
 			bidMap.put("buyerName", b.getBuyer().getUsername());
 			bidList.add(bidMap);
 		}
-		
 		Map<String, Object> result = new HashMap<>();
 		result.put("project", p);
 		result.put("bids", bidList);
 		
 		return result;
+	}
+	
+	private boolean isProjectActive(LocalDateTime deadlineDateTime, LocalDateTime currentDateTime) {
+		return !currentDateTime.isAfter(deadlineDateTime);
 	}
 }
