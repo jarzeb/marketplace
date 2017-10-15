@@ -1,4 +1,4 @@
-package org.jz.marketplace.dao;
+package org.jz.marketplace.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,18 +8,31 @@ import java.util.Map;
 
 import org.jz.marketplace.data.Bid;
 import org.jz.marketplace.data.BidRepository;
+import org.jz.marketplace.data.DataConnector;
+import org.jz.marketplace.data.DataConnectorBean;
 import org.jz.marketplace.data.Project;
 import org.jz.marketplace.data.ProjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.jz.marketplace.data.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProjectService {
 
-	@Autowired
-	private ProjectRepository projectRepo;
-	@Autowired
+	private DataConnector dataConnector;
+	
 	private BidRepository bidRepo;
+	private ProjectRepository projectRepo;
+	private UserRepository userRepo;
+
+	
+	public ProjectService(DataConnector dataConnector) {
+		this.dataConnector = dataConnector;
+		
+		bidRepo = dataConnector.getBidRepository();
+		projectRepo = dataConnector.getProjectRepository();
+		userRepo = dataConnector.getUserRepository();
+	}
+	
 	
 	public List<Map<String,String>> getProjectList() {
 
