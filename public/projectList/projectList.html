@@ -3,13 +3,15 @@
 	</style>
 		<div>
 			<table class="default" style="border:1px solid black; text-align:center;">
-				<tr><th colspan=7 style="background:lightblue;">Project List</b></th></tr>
-				<tr><th>Project #</th>
+				<tr><th colspan=9 style="background:lightblue;">Project List</b></th></tr>
+				<tr><th>Id</th>
 				<th width=75>Seller</th>
 				<th width=200>Description</th>
 				<th width=150>Deadline</th>
 				<th width=125>Billing Type</th>
 				<th width=50>Status</th>
+				<th>Lowest Bid</th>
+				<th>Buyer Name</th>
 				<th width=125></th></tr>
 				<tr/>
 				<tr style="background:{{p.bgColor}};" ng-repeat="p in projects">
@@ -19,6 +21,8 @@
 				<td>{{p.deadline}}</td>
 				<td>{{p.billingType}}</td>
 				<td>{{p.status}}</td>
+				<td>{{p.lowestBid != null ? '$' + p.lowestBid : ''}}</td>
+				<td>{{p.lowestBidUsername}}</td>
 				<td><a href=#!/projectDetail ng-click="openProjectDetail(p.projectId)">Select</a></td>
 				</tr>
 			</table>

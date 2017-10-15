@@ -11,6 +11,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
 app.controller('ProjectDetailCtrl', ['$scope', '$http', '$route', 'shared', function($scope, $http, $route, shared) {
 	
+	$scope.shared = shared;
 	$scope.projectId = shared.getSharedVariable('projectId');
 	$http.get('/projectDetail?projectId=' + $scope.projectId).
     then(function(response) {
@@ -19,7 +20,8 @@ app.controller('ProjectDetailCtrl', ['$scope', '$http', '$route', 'shared', func
     });	
 
 	$scope.createBid = function() {
-		$http.post('/createBid?buyerId=1&projectId=' + $scope.projectId + '&amount=' + $scope.bidAmount).
+		$scope.userId = shared.getSharedVariable('userId');
+		$http.post('/createBid?buyerId=' + $scope.userId + '&projectId=' + $scope.projectId + '&amount=' + $scope.bidAmount).
 		then(function(response) {
 			if(response.data.result == 'true') {
 				alert('bid accepted');

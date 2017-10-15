@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -29,6 +30,9 @@ public class Project {
 	private int startingBid;
 	@NotNull
 	private LocalDateTime deadline;
+
+	@OneToOne
+	private Bid lowestBid;
 	
 	
 	public Project() {}
@@ -81,10 +85,12 @@ public class Project {
 		this.deadline = deadline;
 	}
 
-	@Override
-	public String toString() {
-		return "Project [projectId=" + projectId + ", seller=" + seller + ", billingType=" + billingType
-				+ ", startingBid=" + startingBid + ", deadline=" + deadline + "]";
+	public Bid getLowestBid() {
+		return lowestBid;
+	}
+
+	public void setLowestBid(Bid lowestBid) {
+		this.lowestBid = lowestBid;
 	}
 
 }

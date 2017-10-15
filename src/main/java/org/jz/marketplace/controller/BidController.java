@@ -1,5 +1,6 @@
 package org.jz.marketplace.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.jz.marketplace.service.BidService;
@@ -23,6 +24,12 @@ public class BidController {
 			
 			Map<String,String> result = bidService.createBid(projectId, buyerId, amount);
 			
+			return result;
+		}
+		
+		@RequestMapping(value = "/findBidsByBuyerId", method = RequestMethod.GET)
+		public List<Map<String,String>> findBidsByBuyerId(@Param("buyerId") long buyerId) {
+			List<Map<String,String>> result = bidService.findBidsByBuyerId(buyerId);
 			return result;
 		}
 		

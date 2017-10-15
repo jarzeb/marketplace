@@ -24,7 +24,13 @@ public class Marketplace
 	public Void addSampleData(UserRepository userRepo, ProjectRepository projectRepo, BidRepository bidRepo) {
 		for(User u : SampleData.getUsers()) userRepo.save(u);
 		for(Project p : SampleData.getProjects()) projectRepo.save(p);
-		for(Bid b : SampleData.getBids()) bidRepo.save(b);
+
+		for(Bid b : SampleData.getBids()) {
+			Project p = b.getProject();
+			p.setLowestBid(b);
+			bidRepo.save(b);
+			projectRepo.save(p);
+		}
 		
 		return null;
 	}

@@ -37,7 +37,7 @@ app.controller('UserController', ['$scope', '$http', '$location', 'shared', func
 	
 	$scope.updateUser = function() {
 		shared.setVariable('userId', $scope.selectedUser);
-		$location.path("/");
+		//$location.path("/");
 	};
 
 

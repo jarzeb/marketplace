@@ -11,7 +11,6 @@ import org.jz.marketplace.data.BidRepository;
 import org.jz.marketplace.data.DataConnector;
 import org.jz.marketplace.data.Project;
 import org.jz.marketplace.data.ProjectRepository;
-import org.jz.marketplace.data.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,12 +18,10 @@ public class ProjectService {
 
 	private BidRepository bidRepo;
 	private ProjectRepository projectRepo;
-	private UserRepository userRepo;
 	
 	public ProjectService(DataConnector dataConnector) {
 		bidRepo = dataConnector.getBidRepository();
 		projectRepo = dataConnector.getProjectRepository();
-		userRepo = dataConnector.getUserRepository();
 	}
 	
 	
@@ -34,24 +31,7 @@ public class ProjectService {
 		List<Map<String,String>> result = new ArrayList<>();
 				
 		for(Project project : projectRepo.findAll()) {
-			Map<String,String> row = new HashMap<>();
-			row.put("projectId", String.valueOf(project.getProjectId()));
-			row.put("sellerName", project.getSeller().getUsername());
-			row.put("description", project.getDescription());
-			row.put("deadline", project.getDeadline().toString());
-			row.put("billingType", project.getBillingType().name());
-			String bgColor;
-			String status;
-			if(isProjectActive(project.getDeadline(), currentDateTime)) {
-				bgColor = "lightgray";
-				status = "Active";
-			} else {
-				bgColor = "gray";
-				status = "Closed";
-			}
-			row.put("bgColor", bgColor);
-			row.put("status", status);
-
+			Map<String,String> row = buildProjectRow(project, currentDateTime);
 			result.add(row);
 		}
 		
@@ -62,13 +42,9 @@ public class ProjectService {
 		
 		Project project = projectRepo.findOne(projectId);
 		List<Bid> bids = bidRepo.findBidsByProjectOrderByAmountDesc(project);
+		LocalDateTime currentDateTime = LocalDateTime.now();
 		
-		Map<String,Object> p = new HashMap<>();
-		p.put("projectId", String.valueOf(project.getProjectId()));
-		p.put("sellerName", project.getSeller().getUsername());
-		p.put("description", project.getDescription());
-		p.put("deadline", project.getDeadline().toString());
-		p.put("billingType", project.getBillingType().name());	
+		Map<String,String> p = buildProjectRow(project, currentDateTime);
 		
 		List<Map<String,String>> bidList = new ArrayList<>();
 		for(Bid b : bids) {
@@ -83,6 +59,36 @@ public class ProjectService {
 		result.put("bids", bidList);
 		
 		return result;
+	}
+	
+	private Map<String,String> buildProjectRow(Project project, LocalDateTime currentDateTime) {
+		Map<String,String> row = new HashMap<>();
+		
+		row.put("projectId", String.valueOf(project.getProjectId()));
+		row.put("sellerName", project.getSeller().getUsername());
+		row.put("description", project.getDescription());
+		row.put("deadline", project.getDeadline().toString());
+		row.put("billingType", project.getBillingType().name());
+		
+		Bid lowestBid = project.getLowestBid();
+		if(lowestBid != null) {
+			row.put("lowestBid", String.valueOf(lowestBid.getAmount()));
+			row.put("lowestBidUsername", lowestBid.getBuyer().getUsername());
+		}
+		
+		String bgColor;
+		String status;
+		if(isProjectActive(project.getDeadline(), currentDateTime)) {
+			bgColor = "lightgray";
+			status = "Active";
+		} else {
+			bgColor = "gray";
+			status = "Closed";
+		}
+		row.put("bgColor", bgColor);
+		row.put("status", status);
+		
+		return row;
 	}
 	
 	private boolean isProjectActive(LocalDateTime deadlineDateTime, LocalDateTime currentDateTime) {

@@ -1,7 +1,9 @@
 package org.jz.marketplace.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
@@ -48,8 +50,40 @@ public class BidService {
 		if(!result.isEmpty())
 			return result;
 		
+		// save the bid
 		bidRepo.save(bid);
+		
+		// update the project's reference to lowest bid
+		project.setLowestBid(bid);
+		projectRepo.save(project);
+
 		result.put("result", "true");
+		return result;
+	}
+	
+	public List<Map<String,String>> findBidsByBuyerId(long buyerId) {
+		User buyer = userRepo.findOne(buyerId);
+		
+		List<Bid> bids = bidRepo.findBidsByBuyerOrderByBidDateTimeDesc(buyer);
+		List<Map<String,String>> result = new ArrayList<>();
+		
+		for(Bid b : bids) {
+			Map<String,String> row = new HashMap<>();
+			Project p = b.getProject();
+			Bid lowestBid = p.getLowestBid();
+			row.put("bidDateTime", b.getBidDateTime().toString());
+			row.put("amount", String.valueOf(b.getAmount()));
+			row.put("projectId", String.valueOf(p.getProjectId()));
+			row.put("projectDescription", p.getDescription());
+			row.put("projectDeadline", p.getDeadline().toString());
+			row.put("sellerName", p.getSeller().getUsername());
+			if(lowestBid != null) {
+				row.put("lowestBidAmount", String.valueOf(lowestBid.getAmount()));
+				row.put("lowestBidBuyer", lowestBid.getBuyer().getUsername());
+			}
+			row.put("isLowestBid", b.equals(lowestBid) ? "true" : "false");
+			result.add(row);
+		}
 		
 		return result;
 	}

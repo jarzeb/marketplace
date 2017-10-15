@@ -21,18 +21,17 @@ public class SampleData {
 
 		initialUsers = new ArrayList<>();
 
-		User u = new User("anna");
-		u.setBuyer(true);
-		initialUsers.add(u);
+		initialUsers.add(new User("alice", false, true));
+		initialUsers.add(new User("brian", false, true));
+		initialUsers.add(new User("chantale", true, true));
+		initialUsers.add(new User("daniel", true, true));
 
-		u = new User("bobby");
-		u.setSeller(true);
-		initialUsers.add(u);
-
-		u = new User("carl");
-		u.setBuyer(true);
-		u.setSeller(true);
-		initialUsers.add(u);
+		initialUsers.add(new User("emily", true, false));
+		initialUsers.add(new User("fazaan", true, false));
+		initialUsers.add(new User("giselle", true, false));
+		initialUsers.add(new User("henry", true, false));
+		initialUsers.add(new User("isabelle", true, false));
+		initialUsers.add(new User("jason", true, false));
 
 		return initialUsers;
 	}
@@ -85,19 +84,19 @@ public class SampleData {
 		initialBids = new ArrayList<>();
 
 		Bid b = new Bid();
-		b.setAmount(1001);
-		b.setBidDateTime(LocalDateTime.of(2017,10,20,15,00));
-		b.setBuyer(getUsers().get(1));
-		b.setProject(getProjects().get(0));
-		initialBids.add(b);
-		
-		b = new Bid();
 		b.setAmount(1002);
 		b.setBidDateTime(LocalDateTime.of(2017,10,10,13,00));
 		b.setBuyer(getUsers().get(1));
 		b.setProject(getProjects().get(0));
 		initialBids.add(b);
 
+		b = new Bid();
+		b.setAmount(1001);
+		b.setBidDateTime(LocalDateTime.of(2017,10,20,15,00));
+		b.setBuyer(getUsers().get(1));
+		b.setProject(getProjects().get(0));
+		initialBids.add(b);
+		
 		return initialBids;
 	}
 

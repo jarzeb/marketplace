@@ -21,8 +21,10 @@ public class User {
 	
 	protected User() {}
 	
-	public User(String username) {
+	public User(String username, boolean isBuyer, boolean isSeller) {
 		this.username = username;
+		this.isBuyer = isBuyer;
+		this.isSeller = isSeller;
 	}
 	
 	public long getUserId() {
