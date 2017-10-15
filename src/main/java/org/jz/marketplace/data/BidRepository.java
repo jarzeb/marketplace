@@ -10,5 +10,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface BidRepository extends CrudRepository<Bid, Long> {
 	
 	List<Bid> findBidsByProjectOrderByAmountDesc(@Param("project") Project project);
-	
+	Bid findFirstBidByProjectOrderByAmount(@Param("project") Project project);
 }

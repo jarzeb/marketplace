@@ -10,6 +10,11 @@
     <bean id="dataConnectorBean"
           class="org.jz.marketplace.data.DataConnectorBean"/>
  
+	<bean id="BidService" 
+             class="org.jz.marketplace.service.BidService">
+  		<constructor-arg ref="dataConnectorBean"/>
+	</bean>
+
 	<bean id="ProjectService" 
              class="org.jz.marketplace.service.ProjectService">
   		<constructor-arg ref="dataConnectorBean"/>

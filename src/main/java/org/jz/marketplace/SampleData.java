@@ -55,10 +55,18 @@ public class SampleData {
 		p.setBillingType(BillingType.HOURLY);
 		p.setDeadline(LocalDateTime.of(2017, 11, 02, 11, 10));
 		p.setSeller(getUsers().get(2));
-		p.setStartingBid(9999);
+		p.setStartingBid(50);
+		p.setDescription("Cut the grass.");
+		initialProjects.add(p);
+
+		p = new Project();
+		p.setBillingType(BillingType.FIXED);
+		p.setDeadline(LocalDateTime.of(2017, 11, 11, 15, 15));
+		p.setSeller(getUsers().get(2));
+		p.setStartingBid(5000);
 		p.setDescription("Wash my car.");
 		initialProjects.add(p);
-		
+
 		p = new Project();
 		p.setBillingType(BillingType.HOURLY);
 		p.setDeadline(LocalDateTime.of(2017, 10, 01, 9, 00));

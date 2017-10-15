@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProjectController {
 	
 	@Autowired
-	private ProjectService projectDao;
+	private ProjectService projectService;
 
 	@RequestMapping(value = "/projectList", method = RequestMethod.GET)
 	public List<Map<String,String>> getProjectList() {
-		List<Map<String,String>> result = projectDao.getProjectList();
+		List<Map<String,String>> result = projectService.getProjectList();
 		return result;
 	}
 	
 	@RequestMapping(value = "/projectDetail", method = RequestMethod.GET)
 	public Map<String,Object> getProjectDetail(@Param("projectId") long projectId) {
-		Map<String,Object> result = projectDao.getProjectDetail(projectId);
+		Map<String,Object> result = projectService.getProjectDetail(projectId);
 		return result;
 	}
 
