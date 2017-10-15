@@ -9,7 +9,7 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-app.controller('ProjectDetailCtrl', ['$scope', '$http', 'shared', function($scope, $http, shared) {
+app.controller('ProjectDetailCtrl', ['$scope', '$http', '$route', 'shared', function($scope, $http, $route, shared) {
 	
 	$scope.projectId = shared.getSharedVariable('projectId');
 	$http.get('/projectDetail?projectId=' + $scope.projectId).
@@ -19,10 +19,15 @@ app.controller('ProjectDetailCtrl', ['$scope', '$http', 'shared', function($scop
     });	
 
 	$scope.createBid = function() {
-		  //shared.setVariable('projectId', projectId);
-		  //$scope.projectId = projectId;
-		  //$location.path("/projectDetail");
-		$http.post('/createBid?buyerId=1&projectId=' + $scope.projectId + '&amount=' + $scope.bidAmount);
+		$http.post('/createBid?buyerId=1&projectId=' + $scope.projectId + '&amount=' + $scope.bidAmount).
+		then(function(response) {
+			if(response.data.result == 'true') {
+				alert('bid accepted');
+			} else {
+				alert(response.data.error);
+			}
+			$route.reload();
+		});
 	};
 	
 }]);

@@ -49,7 +49,7 @@ public class BidService {
 			return result;
 		
 		bidRepo.save(bid);
-		result.put("success", "true");
+		result.put("result", "true");
 		
 		return result;
 	}
@@ -66,6 +66,8 @@ public class BidService {
 			error = "buyer cannot be same user as seller";
 		} else if(!buyer.isBuyer()) {
 			error = "user does not have buyer status";
+		} else if(bid.getAmount() <= 0) {
+			error = "bid must be greater than $0";
 		} else if(lowestBid != null && lowestBid.getAmount() <= bid.getAmount()) {
 			error = "bid must be less than the current lowest bid";
 		} else if(bid.getAmount() > project.getStartingBid()) {
@@ -74,6 +76,7 @@ public class BidService {
 		
 		if(error != null) {
 			result.put("error", error);
+			result.put("result", "false");
 		}
 		
 		return result;
