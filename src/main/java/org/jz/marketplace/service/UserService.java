@@ -15,6 +15,14 @@ public class UserService {
 		userRepo = dataConnector.getUserRepository();
 	}
 
+	public User createUser(User user) {
+		return userRepo.save(user);
+	}
+	
+	public Iterable<User> createUsers(Iterable<User> users) {
+		return userRepo.save(users);
+	}
+	
 	public User getUser(long userId) {
 		return userRepo.findOne(userId);
 	}
@@ -22,4 +30,5 @@ public class UserService {
 	public List<User> getFirst10Users() {
 		return userRepo.findTop10ByOrderByUserId();
 	}
+	
 }

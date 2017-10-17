@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.jz.marketplace.data.User.UserBuilder;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
@@ -95,5 +96,23 @@ public class Project {
 	public void setLowestBid(Bid lowestBid) {
 		this.lowestBid = lowestBid;
 	}
+	
+
+	public static class ProjectBuilder {
+		
+		private Project project;
+		
+		public ProjectBuilder() { project = new Project(); }
+		
+		public ProjectBuilder seller(User seller) 			{ this.project.setSeller(seller); return this; }
+		public ProjectBuilder description(String description) 	{ this.project.setDescription(description); return this; }
+		public ProjectBuilder billingType(BillingType billingType) { this.project.setBillingType(billingType); return this; }
+		public ProjectBuilder startingBid(int startingBid) 	{ this.project.setStartingBid(startingBid); return this; }
+		public ProjectBuilder deadline(LocalDateTime deadline) { this.project.setDeadline(deadline); return this; }
+		public ProjectBuilder lowestBid(Bid lowestBid) 		{ this.project.setLowestBid(lowestBid); return this; }
+		
+		public Project build() { return project; }
+	}
+
 
 }

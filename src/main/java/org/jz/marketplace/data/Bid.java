@@ -84,10 +84,20 @@ public class Bid {
 	public void setBidDateTime(LocalDateTime bidDateTime) {
 		this.bidDateTime = bidDateTime;
 	}
+	
 
-
-	@Override
-	public String toString() {
-		return "Bid [bidId=" + bidId + ", project=" + project + ", buyer=" + buyer + ", amount=" + amount + "]";
+	public static class BidBuilder {
+		
+		private Bid bid;
+		
+		public BidBuilder() { bid = new Bid(); }
+		
+		public BidBuilder project(Project project) 		{ this.bid.setProject(project); return this; }
+		public BidBuilder buyer(User buyer) 			{ this.bid.setBuyer(buyer); return this; }
+		public BidBuilder amount(int amount) 			{ this.bid.setAmount(amount); return this; }
+		public BidBuilder bidDateTime(LocalDateTime bidDateTime) 	{ this.bid.setBidDateTime(bidDateTime); return this; }
+		public Bid build() { return bid; }
 	}
+
+
 }

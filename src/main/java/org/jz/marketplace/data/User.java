@@ -19,14 +19,9 @@ public class User {
 	private boolean isBuyer;
 	private boolean isSeller;
 	
-	protected User() {}
+	public User() {}
 	
-	public User(String username, boolean isBuyer, boolean isSeller) {
-		this.username = username;
-		this.isBuyer = isBuyer;
-		this.isSeller = isSeller;
-	}
-	
+		
 	public long getUserId() {
 		return userId;
 	}
@@ -59,8 +54,18 @@ public class User {
 		this.username = username;
 	}
 	
-	public String toString() {
-		return String.format("User[userId='%d', username='%s', isBuyer='%b', isSeller='%b']",
-				getUserId(), getUsername(), isBuyer(), isSeller());
+	
+	public static class UserBuilder {
+		
+		private User user;
+		
+		public UserBuilder() { user = new User(); }
+		
+		public UserBuilder username(String username) 	{ this.user.setUsername(username); return this; }
+		public UserBuilder isBuyer(boolean isBuyer) 	{ this.user.setBuyer(isBuyer); return this; }
+		public UserBuilder isSeller(boolean isSeller) 	{ this.user.setSeller(isSeller); return this; }
+		
+		public User build() { return user; }
 	}
+
 }
