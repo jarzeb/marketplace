@@ -1,9 +1,7 @@
-	<style>
-		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
-	</style>
 		<div>
-			<table class="default" style="border:1px solid black; text-align:center;">
-				<tr><th colspan=4 style="background:orange;">Bid<th colspan=9 style="background:violet;">Project</th></tr>
+			<table class="tables"">
+				<tr><th colspan=4 style="background:orange;">Bid</th>
+				<th colspan=20 style="background:violet;">Project</th></tr>
 				<tr>
 				<th>Id</th>
 				<th>Buyer</th>
@@ -12,15 +10,16 @@
 				<th>Id</th>
 				<th>Seller</th>
 				<th>Description</th>
+				<th>Starting Amount</th>
 				<th>Deadline</th>
 				<th>Billing Type</th>
 				<th>Status</th>
 				<th>Lowest Bid</th>
 				<th>Lowest Bidder</th>
-				<th></th>
 				</tr>
 				<tr/>
-				<tr style="background:{{b.status == 'Active' ? 'lightgrey' : 'grey'}};" ng-repeat="b in bids">
+				<tr ng-show="!bids.length"><td colspan=20 style="background:lightgrey; text-align:center;">No bids found</td></tr>
+				<tr style="background:{{b.status == 'Active' ? 'lightgrey' : (b.status == 'Won') ? 'lightgreen' : 'pink'}};" ng-repeat="b in bids">
 				<td>{{b.bidId}}</td>
 				<td>{{b.buyerName}}</td>
 				<td>{{b.amount}}</td>
@@ -28,6 +27,7 @@
 				<td>{{b.projectId}}</td>
 				<td>{{b.sellerName}}</td>
 				<td>{{b.description}}</td>
+				<td>{{b.startingAmount}}</td>
 				<td>{{b.deadline}}</td>
 				<td>{{b.billingType}}</td>
 				<td>{{b.status}}</td>

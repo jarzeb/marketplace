@@ -32,22 +32,19 @@ public class BidService {
 	}
 	
 	@Transactional
-	public Map<String,String> createBid(long projectId, long buyerId, int amount) {
+	public Map<String,String> createBid(Bid bid) {
 
-		LocalDateTime bidDateTime = LocalDateTime.now();
 		Map<String,String> result = new HashMap<>();
 
-		Project project = projectRepo.findOne(projectId);
-		User buyer = userRepo.findOne(buyerId);
+		Project project = projectRepo.findOne(bid.getProject().getProjectId());
+		User buyer = userRepo.findOne(bid.getBuyer().getUserId());
 		Bid lowestBid = bidRepo.findFirstBidByProjectOrderByAmount(project);
 		
-		Bid bid = new Bid();
-		bid.setAmount(amount);
-		bid.setBidDateTime(bidDateTime);
-		bid.setBuyer(buyer);
 		bid.setProject(project);
+		bid.setBuyer(buyer);
 
-		result = validateBid(project, buyer, bid, lowestBid, result);		
+		bid.setBidDateTime(LocalDateTime.now());
+		result = validateBid(bid, lowestBid, result);		
 		if(!result.isEmpty())
 			return result;
 		
@@ -86,8 +83,11 @@ public class BidService {
 		return result;
 	}
 	
-	private Map<String,String> validateBid(Project project, User buyer, Bid bid, Bid lowestBid, Map<String,String> result) {
+	private Map<String,String> validateBid(Bid bid, Bid lowestBid, Map<String,String> result) {
 		String error = null;
+		Project project = bid.getProject();
+		User buyer = bid.getBuyer();
+		
 		if(project == null) {
 			error = "project not found";
 		} else if(buyer == null) {
@@ -102,7 +102,7 @@ public class BidService {
 			error = "bid must be greater than $0";
 		} else if(lowestBid != null && lowestBid.getAmount() <= bid.getAmount()) {
 			error = "bid must be less than the current lowest bid";
-		} else if(bid.getAmount() > project.getStartingBid()) {
+		} else if(project.getStartingAmount() != null && bid.getAmount() > project.getStartingAmount()) {
 			error = "bid must be less than or equal to the starting bid";
 		}
 		

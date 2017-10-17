@@ -27,12 +27,17 @@ app.controller('UserController', ['$scope', '$http', '$location', '$route', 'sha
 	$http.get('/getFirst10Users').
     then(function(response) {
         $scope.users = response.data;
+        angular.forEach($scope.users, function(user) {
+        	user.str = user.userId + " - " + user.username;
+        	user.str += ' [' + (user.seller==true ? 's' : '') + (user.buyer==true ? 'b' : '') + ']';
+        });
     });
 	
+	$location.path("/projectList");
 	$scope.updateUser = function() {
 		shared.setVariable('userId', $scope.selectedUser);
 		$route.reload();
 		//$location.path("/");
 	};
-
+	
 }]);

@@ -38,7 +38,7 @@ public class SampleData {
 		userRepo.save(getUsers());
 		projectRepo.save(getProjects());
 		for(Bid b : getBids())
-			bidService.createBid(b.getProject().getProjectId(), b.getBuyer().getUserId(), b.getAmount());
+			bidService.createBid(b);
 
 		return null;
 	}
@@ -73,23 +73,22 @@ public class SampleData {
 		
 		User[] s = { getUsers().get(0), getUsers().get(1), getUsers().get(2), getUsers().get(3) };
 		
-		LocalDateTime deadline1 = LocalDateTime.parse("2017-10-01T13:30:00");
-		LocalDateTime deadline2 = LocalDateTime.parse("2017-11-01T13:30:00");
+		LocalDateTime deadline = LocalDateTime.now();
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(deadline1).seller(s[0])
-				.startingBid(10000).description("Paint my house.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(deadline.plusSeconds(5)).seller(s[0])
+				.startingAmount(10000).description("Paint my house.").build());
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(deadline1.plusDays(1)).seller(s[0])
-				.startingBid(9000).description("Cut the grass.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(deadline.plusDays(1)).seller(s[0])
+				.startingAmount(9000).description("Cut the grass.").build());
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(deadline2).seller(s[1])
-				.startingBid(8000).description("Do my dishes.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(deadline.plusDays(2)).seller(s[1])
+				.startingAmount(8000).description("Do my dishes.").build());
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(deadline2.plusDays(1)).seller(s[2])
-				.startingBid(500).description("Wash my car.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(deadline.plusDays(3)).seller(s[2])
+				.description("Wash my car.").build());
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(deadline2.plusDays(2)).seller(s[3])
-				.startingBid(100).description("Clean the kitchen.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(deadline.plusDays(4)).seller(s[3])
+				.description("Clean the kitchen.").build());
 
 		return initialProjects;
 	}
@@ -101,7 +100,7 @@ public class SampleData {
 		initialBids = new ArrayList<>();
 
 		LocalDateTime bidDateTime = LocalDateTime.parse("2017-10-20T13:00:20");
-		Project project = getProjects().get(2);
+		Project project = getProjects().get(0);
 		User buyer = getUsers().get(3);
 		
 		initialBids.add(new BidBuilder().amount(1002).bidDateTime(bidDateTime).buyer(buyer).project(project).build());

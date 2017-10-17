@@ -17,6 +17,7 @@ public class ProjectFormatter {
 		row.put("description", project.getDescription());
 		row.put("deadline", project.getDeadline().toString());
 		row.put("billingType", project.getBillingType().name());
+		row.put("startingAmount", project.getStartingAmount()==null ? "" : "$" + String.valueOf(project.getStartingAmount()));
 		
 		Bid lowestBid = project.getLowestBid();
 		if(lowestBid != null) {
@@ -24,9 +25,15 @@ public class ProjectFormatter {
 			row.put("lowestBidUsername", lowestBid.getBuyer().getUsername());
 		}
 		
-		String status = isProjectActive(project, currentDateTime)
-				? "Active" : "Closed";
-
+		boolean isActive = isProjectActive(project, currentDateTime);
+		String status = "";
+		if(isActive) {
+			status = "Active";
+		} else if(lowestBid == null) {
+			status = "Ended";
+		} else {
+			status = "Won";
+		}
 		row.put("status", status);
 		
 		return row;

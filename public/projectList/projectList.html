@@ -1,29 +1,29 @@
-	<style>
-		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
-	</style>
-		<div>
-			<table class="default" style="border:1px solid black; text-align:center;">
-				<tr><th colspan=9 style="background:lightblue;">Project List</b></th></tr>
-				<tr><th>Id</th>
-				<th>Seller</th>
-				<th>Description</th>
-				<th>Deadline</th>
-				<th>Type</th>
-				<th>Status</th>
-				<th>Lowest Bid</th>
-				<th>Buyer</th>
-				<th width=125></th></tr>
-				<tr/>
-				<tr style="background:{{p.status == 'Active' ? 'lightgrey' : 'pink'}};" ng-repeat="p in projects">
-				<td>{{p.projectId}}</td>
-				<td>{{p.sellerName}}</td>
-				<td>{{p.description}}</td>
-				<td>{{p.deadline}}</td>
-				<td>{{p.billingType}}</td>
-				<td>{{p.status}}</td>
-				<td>{{p.lowestBid}}</td>
-				<td>{{p.lowestBidUsername}}</td>
-				<td><a href=#!/projectDetail ng-click="openProjectDetail(p.projectId)">Open</a></td>
-				</tr>
-			</table>
-		</div>
+
+	<div>
+		<table class="tables">
+			<tr><th colspan=20 style="background:lightblue;">Project List</b></th></tr>
+			<tr><th>Id</th>
+			<th>Seller</th>
+			<th>Description</th>
+			<th>Deadline</th>
+			<th>Starting Bid</th>
+			<th>Type</th>
+			<th>Status</th>
+			<th>Lowest Bid</th>
+			<th>Buyer</th>
+			<tr/>
+			<tr ng-show="!projects.length"><td colspan=20 style="background:lightgrey; text-align:center;">No projects found</td></tr>
+			<tr style="background:{{p.status == 'Active' ? 'lightgrey' : (p.status == 'Won') ? 'lightgreen' : 'pink'}};" ng-repeat="p in projects">
+			<td>{{p.projectId}}</td>
+			<td>{{p.sellerName}}</td>
+			<td>{{p.description}}</td>
+			<td>{{p.deadline}}</td>
+			<td>{{p.startingAmount}}</td>
+			<td>{{p.billingType}}</td>
+			<td>{{p.status}}</td>
+			<td>{{p.lowestBid}}</td>
+			<td>{{p.lowestBidUsername}}</td>
+			<td width=100><a href=#!/projectDetail ng-click="openProjectDetail(p.projectId)">Open</a></td>
+			</tr>
+		</table>
+	</div>

@@ -85,8 +85,8 @@ public class ProjectService {
 			result.put("error", "user not found");
 		} else if(!seller.isSeller()) {
 			result.put("error", "user is not a seller");
-		} else if(project.getStartingBid() < 1) {
-			result.put("error", "starting bid must be at least $1");
+		} else if(project.getStartingAmount() != null && project.getStartingAmount() < 1) {
+			result.put("error", "starting amount must be either blank or >= $1");
 		} else if(currentDateTime.isAfter(project.getDeadline())) {
 			result.put("error",  "deadline cannot be in the past");
 		}

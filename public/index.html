@@ -4,6 +4,8 @@
 
 	<style>
 		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
+		.tables { border:1px solid black; text-align:center; } 
+		.tables th { border:1px solid lightgrey; }
 	</style>
 	
 	<head>
@@ -15,15 +17,18 @@
 		<tr><th colspan=3>
 		<div ng-controller="UserController">
 			Select User:&nbsp;
-			<select ng-model="selectedUser"	ng-change="updateUser()" ng-options="u.userId as (u.userId + ' - ' + u.username) for u in users">
+			<select ng-model="selectedUser"	ng-change="updateUser()" ng-options="u.userId as (u.str) for u in users">
 				<option></option>
 			</select>
+			<br>(s=seller / b=buyer)
 		</div>
 		</th></tr>
+		<tr><td></td></tr>
 		<tr><tr><th colspan=3>Welcome to the Marketplace</th></tr>
 		<tr/>
+		<tr><td colspan=3 style='text-align:center;'><a href=#!/projectList>Project List</a></td>
+		<tr><td/></tr>
 		<tr><th>Seller Menu</th>												<th width=100/><th>Buyer Menu</th></tr><tr/>
-		<tr><td><a href=#!/projectList>View all Projects</a></td>				<td/><td><a href=#!/projectList>View all Projects</a></td></tr>
 		<tr><td><a href=#!/projectList?filter=true>View my Projects</a></td>	<td/><td><a href=#!/bidList>View my Bids</a></td></tr>
 		<tr><td><a href=#!/postProject>Post a Project</a></td>		    		<td/><td>View my Wins</td>
 	</table>

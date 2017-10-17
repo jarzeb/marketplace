@@ -11,27 +11,25 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Bid {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long bidId;
 
-	@ManyToOne
-	@NotNull
+	@ManyToOne @NotNull	@RestResource(exported = false)
 	private Project project;
 
-	@ManyToOne
-	@NotNull
+	@ManyToOne @NotNull @RestResource(exported = false)
 	private User buyer;
 	
 	@NotNull
-	private Integer amount;
+	private int amount;
 	
-	private LocalDateTime bidDateTime = LocalDateTime.now();
+	private LocalDateTime bidDateTime;
 	
 	public Bid() {}
 

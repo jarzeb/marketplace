@@ -18,9 +18,16 @@ app.controller('ProjectDetailCtrl', ['$scope', '$http', '$route', 'shared', func
         $scope.bids = response.data.bids;
     });	
 
+	
 	$scope.createBid = function() {
 		$scope.userId = shared.getSharedVariable('userId');
-		$http.post('/createBid?buyerId=' + $scope.userId + '&projectId=' + $scope.projectId + '&amount=' + $scope.bidAmount).
+		
+		var payload = JSON.stringify(
+				{project: {projectId: $scope.projectId},
+					buyer: {userId: $scope.userId},
+						amount: $scope.bidAmount});
+
+		$http.post('/createBid', payload).
 		then(function(response) {
 			if(response.data.result == 'true') {
 				alert('bid accepted');
@@ -29,6 +36,7 @@ app.controller('ProjectDetailCtrl', ['$scope', '$http', '$route', 'shared', func
 			}
 			$route.reload();
 		});
+
 	};
 	
 }]);

@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import org.jz.marketplace.data.User.UserBuilder;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
@@ -20,18 +19,20 @@ public class Project {
 		HOURLY, FIXED;
 	}
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private long projectId;
 
-	@ManyToOne
-	@RestResource(exported = false)
+	@ManyToOne @RestResource(exported = false)
 	private User seller;
+	
 	@NotNull
 	private String description;
+	
 	@NotNull
 	private BillingType billingType;
-	private int startingBid;
+	
+	private Integer startingAmount;
+	
 	@NotNull
 	private LocalDateTime deadline;
 
@@ -73,12 +74,12 @@ public class Project {
 		this.billingType = billingType;
 	}
 
-	public int getStartingBid() {
-		return startingBid;
+	public Integer getStartingAmount() {
+		return startingAmount;
 	}
 
-	public void setStartingBid(int startingBid) {
-		this.startingBid = startingBid;
+	public void setStartingAmount(Integer startingAmount) {
+		this.startingAmount = startingAmount;
 	}
 
 	public LocalDateTime getDeadline() {
@@ -107,12 +108,11 @@ public class Project {
 		public ProjectBuilder seller(User seller) 			{ this.project.setSeller(seller); return this; }
 		public ProjectBuilder description(String description) 	{ this.project.setDescription(description); return this; }
 		public ProjectBuilder billingType(BillingType billingType) { this.project.setBillingType(billingType); return this; }
-		public ProjectBuilder startingBid(int startingBid) 	{ this.project.setStartingBid(startingBid); return this; }
+		public ProjectBuilder startingAmount(Integer startingAmount) 	{ this.project.setStartingAmount(startingAmount); return this; }
 		public ProjectBuilder deadline(LocalDateTime deadline) { this.project.setDeadline(deadline); return this; }
 		public ProjectBuilder lowestBid(Bid lowestBid) 		{ this.project.setLowestBid(lowestBid); return this; }
 		
 		public Project build() { return project; }
 	}
-
 
 }
