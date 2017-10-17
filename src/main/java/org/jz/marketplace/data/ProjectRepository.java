@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProjectRepository extends CrudRepository<Project, Long> {
 
-	List<Project> findProjectsBySellerOrderByDeadlineAsc(@Param("seller") User seller);
-	List<Project> findProjectsByOrderByDeadlineAsc();
+	List<Project> findTop100ProjectsBySellerOrderByDeadlineDesc(@Param("seller") User seller);
+	List<Project> findTop100ProjectsByOrderByDeadlineDesc();
 }

@@ -9,10 +9,9 @@ import org.springframework.stereotype.Repository;
 //@RepositoryRestResource(collectionResourceRel = "bids", path = "bids")
 @Repository
 public interface BidRepository extends CrudRepository<Bid, Long> {
-	
-	List<Bid> findBidsByProjectOrderByAmountDesc(@Param("project") Project project);
+
+	List<Bid> findTop100BidsByBuyerOrderByBidDateTimeAsc(@Param("buyer") User buyer);
+	List<Bid> findTop100BidsByProjectOrderByBidDateTimeAsc(@Param("project") Project project);
 	
 	Bid findFirstBidByProjectOrderByAmount(@Param("project") Project project);
-	
-	List<Bid> findBidsByBuyerOrderByBidDateTimeDesc(@Param("buyer") User buyer);
 }

@@ -44,7 +44,7 @@ public class SampleData {
 
 		Project p = new Project();
 		p.setBillingType(BillingType.FIXED);
-		p.setDeadline(LocalDateTime.of(2017, 10, 25, 13, 30, 0));
+		p.setDeadline(LocalDateTime.of(2017, 10, 01, 13, 30, 0));
 		p.setSeller(getUsers().get(2));
 		p.setStartingBid(1000);
 		p.setDescription("Paint my house.");
@@ -52,7 +52,7 @@ public class SampleData {
 
 		p = new Project();
 		p.setBillingType(BillingType.HOURLY);
-		p.setDeadline(LocalDateTime.of(2017, 11, 02, 11, 10, 0));
+		p.setDeadline(LocalDateTime.of(2017, 11, 01, 11, 10, 0));
 		p.setSeller(getUsers().get(2));
 		p.setStartingBid(50);
 		p.setDescription("Cut the grass.");
@@ -60,7 +60,7 @@ public class SampleData {
 
 		p = new Project();
 		p.setBillingType(BillingType.FIXED);
-		p.setDeadline(LocalDateTime.of(2017, 11, 11, 15, 15, 0));
+		p.setDeadline(LocalDateTime.of(2017, 11, 05, 15, 15, 0));
 		p.setSeller(getUsers().get(2));
 		p.setStartingBid(5000);
 		p.setDescription("Wash my car.");
@@ -68,7 +68,7 @@ public class SampleData {
 
 		p = new Project();
 		p.setBillingType(BillingType.HOURLY);
-		p.setDeadline(LocalDateTime.of(2017, 10, 1, 9, 0, 0));
+		p.setDeadline(LocalDateTime.of(2017, 11, 15, 9, 0, 0));
 		p.setSeller(getUsers().get(1));
 		p.setStartingBid(100);
 		p.setDescription("Do my dishes.");

@@ -3,10 +3,10 @@ package org.jz.marketplace.data;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-//@RepositoryRestResource(collectionResourceRel = "users", path = "users")
-@Repository
+@RepositoryRestResource(collectionResourceRel = "users", path = "users")
+//@Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
 	List<User> findByUsername(String username);

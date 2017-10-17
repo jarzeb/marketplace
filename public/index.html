@@ -1,5 +1,7 @@
 <!doctype html>
 <html lang="en" ng-app="marketplace">
+<link rel="stylesheet" href="components/angular-material.min.css">
+
 	<style>
 		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
 	</style>
@@ -20,18 +22,23 @@
 		</th></tr>
 		<tr><tr><th colspan=3>Welcome to the Marketplace</th></tr>
 		<tr/>
-		<tr><th>Seller Menu</th>										<th width=100/><th>Buyer Menu</th></tr><tr/>
-		<tr><td><a href=#!/projectList>View all Projects</a></td>		<td/><td><a href=#!/projectList>View all Projects</a></td></tr>
+		<tr><th>Seller Menu</th>												<th width=100/><th>Buyer Menu</th></tr><tr/>
+		<tr><td><a href=#!/projectList>View all Projects</a></td>				<td/><td><a href=#!/projectList>View all Projects</a></td></tr>
 		<tr><td><a href=#!/projectList?filter=true>View my Projects</a></td>	<td/><td><a href=#!/bidList>View my Bids</a></td></tr>
-		<tr><td>Post a Project</td>									    <tr><td>View my Wins</td>
+		<tr><td><a href=#!/postProject>Post a Project</a></td>		    		<td/><td>View my Wins</td>
 	</table>
 	
 	<br><div ng-view></div>
 	
 	  <script src="components/angular.min.js"></script>
+	  <script src="components/angular-animate.min.js"></script>
+	  <script src="components/angular-aria.min.js"></script>
+	  <script src="components/angular-material.min.js"></script>
+	  <script src="components/angular-messages.min.js"></script>
 	  <script src="components/angular-route.js"></script>
 	  <script src="marketplace.js"></script>
 	  <script src="bidList/bidList.js"></script>
+	  <script src="postProject/postProject.js"></script>
 	  <script src="projectList/projectList.js"></script>
 	  <script src="projectDetail/projectDetail.js"></script>
 	</body>  

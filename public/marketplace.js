@@ -1,16 +1,9 @@
 'use strict';
 
-var app = angular.module('marketplace', ['ngRoute']);
+var app = angular.module('marketplace', ['ngRoute', 'ngMaterial', 'ngMessages']);
 
 app.config(['$locationProvider', '$routeProvider', '$httpProvider', function($locationProvider, $routeProvider, $httpProvider) {
   $locationProvider.hashPrefix('!');
-  
-  if (!$httpProvider.defaults.headers.get) {
-	  $httpProvider.defaults.headers.get = {};    
-  }    
-  $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
-  $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
-  $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 }]);
 
 app.service('shared', function () {
@@ -28,6 +21,9 @@ app.service('shared', function () {
 });
 
 app.controller('UserController', ['$scope', '$http', '$location', '$route', 'shared', function($scope, $http, $location, $route, shared) {	  
+	this.myDate = new Date();
+	this.isOpen = false;
+
 	$http.get('/getFirst10Users').
     then(function(response) {
         $scope.users = response.data;

@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 @Entity
 public class Project {
 	
@@ -22,6 +24,7 @@ public class Project {
 	private long projectId;
 
 	@ManyToOne
+	@RestResource(exported = false)
 	private User seller;
 	@NotNull
 	private String description;

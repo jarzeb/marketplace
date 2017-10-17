@@ -33,10 +33,10 @@ public class ProjectService {
 	
 		List<Project> projectList = null;
 		if(sellerId == null) {
-			projectList = projectRepo.findProjectsByOrderByDeadlineAsc();
+			projectList = projectRepo.findTop100ProjectsByOrderByDeadlineDesc();
 		} else {
 			User seller = userRepo.findOne(sellerId);
-			projectList = projectRepo.findProjectsBySellerOrderByDeadlineAsc(seller);
+			projectList = projectRepo.findTop100ProjectsBySellerOrderByDeadlineDesc(seller);
 		}
 		
 		LocalDateTime currentDateTime = LocalDateTime.now();
@@ -53,7 +53,7 @@ public class ProjectService {
 	public Map<String,Object> getProjectDetail(long projectId) {
 		
 		Project project = projectRepo.findOne(projectId);
-		List<Bid> bids = bidRepo.findBidsByProjectOrderByAmountDesc(project);
+		List<Bid> bids = bidRepo.findTop100BidsByProjectOrderByBidDateTimeAsc(project);
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
 		Map<String,String> p = ProjectFormatter.format(project, currentDateTime);
@@ -72,4 +72,33 @@ public class ProjectService {
 		
 		return result;
 	}
+	
+	public Map<String,String> createProject(Project project) {
+		
+		Map<String,String> result = new HashMap<>();
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		
+		User seller = userRepo.findOne(project.getSeller().getUserId());
+		project.setSeller(seller);
+		
+		if(seller == null) {
+			result.put("error", "user not found");
+		} else if(!seller.isSeller()) {
+			result.put("error", "user is not a seller");
+		} else if(project.getStartingBid() < 1) {
+			result.put("error", "starting bid must be at least $1");
+		} else if(currentDateTime.isAfter(project.getDeadline())) {
+			result.put("error",  "deadline cannot be in the past");
+		}
+		
+		if(result.size() > 0) {
+			return result;
+		}
+
+		projectRepo.save(project);
+		
+		result.put("result", "true");
+		return result;
+	}
+
 }

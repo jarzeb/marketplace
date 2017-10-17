@@ -15,6 +15,10 @@ public class UserService {
 		userRepo = dataConnector.getUserRepository();
 	}
 
+	public User getUser(long userId) {
+		return userRepo.findOne(userId);
+	}
+	
 	public List<User> getFirst10Users() {
 		return userRepo.findTop10ByOrderByUserId();
 	}

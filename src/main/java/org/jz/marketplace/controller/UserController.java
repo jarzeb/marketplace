@@ -5,6 +5,7 @@ import java.util.List;
 import org.jz.marketplace.data.User;
 import org.jz.marketplace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,5 +21,9 @@ public class UserController {
 		return userService.getFirst10Users();
 	}
 
+	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
+	public User getUser(@Param("userId") long userId) {
+		return userService.getUser(userId);
+	}
 
 }

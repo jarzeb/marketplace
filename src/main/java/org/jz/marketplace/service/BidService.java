@@ -65,7 +65,7 @@ public class BidService {
 	public List<Map<String,String>> findBidsByBuyerId(long buyerId) {
 		User buyer = userRepo.findOne(buyerId);
 		
-		List<Bid> bids = bidRepo.findBidsByBuyerOrderByBidDateTimeDesc(buyer);
+		List<Bid> bids = bidRepo.findTop100BidsByBuyerOrderByBidDateTimeAsc(buyer);
 		List<Map<String,String>> result = new ArrayList<>();
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		

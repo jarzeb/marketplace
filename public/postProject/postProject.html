@@ -1,0 +1,20 @@
+	<style>
+		.default { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
+	</style>
+		<div><b><u>Post a Project</u></b></div>
+		<div>
+		<br>
+		<table>
+		<tr><td>*Billing Type:</td><td><select ng-model="billingType"><option>FIXED</option><option>HOURLY</option></select></td></tr>
+		<tr><td>*Description:</td><td><input ng-model="description" maxlength=60 size=50 type=text></td></tr>
+		<tr><td>*Deadline:</td>
+		<td>Date:<md-datepicker ng-model="deadlineDate"></md-datepicker></td></tr>
+		<tr><td>*Time:<td>Hour<select ng-model="deadlineHour"><option ng-repeat="n in [] | range:24">{{n}}</option></select>
+			Minute<select ng-model="deadlineMinute"><option ng-repeat="n in [] | range:60">{{n}}</option></select></td>
+		</tr>
+		<tr><td>*Starting Bid:</td><td><input ng-model="startingBid" type=text maxlength=6 size=6></td></tr>
+		</table>
+		<br>
+		<button ng-click="createProject()">Post Now</button>			
+		</div>
+		<div><br>(* denotes required field)</div>
