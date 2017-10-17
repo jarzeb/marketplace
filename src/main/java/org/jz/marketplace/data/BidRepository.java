@@ -14,4 +14,7 @@ public interface BidRepository extends CrudRepository<Bid, Long> {
 	List<Bid> findTop100BidsByProjectOrderByBidDateTimeAsc(@Param("project") Project project);
 	
 	Bid findFirstBidByProjectOrderByAmount(@Param("project") Project project);
+
+	// used for archiving old bids
+	List<Bid> findBidsByProject(@Param("project") Project project);
 }

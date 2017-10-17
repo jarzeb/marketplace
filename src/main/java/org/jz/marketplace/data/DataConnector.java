@@ -5,5 +5,5 @@ public interface DataConnector {
 	public BidRepository getBidRepository();
 	public ProjectRepository getProjectRepository();
 	public UserRepository getUserRepository();
-	
+
 }

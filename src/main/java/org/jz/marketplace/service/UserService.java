@@ -19,10 +19,6 @@ public class UserService {
 		return userRepo.save(user);
 	}
 	
-	public Iterable<User> createUsers(Iterable<User> users) {
-		return userRepo.save(users);
-	}
-	
 	public User getUser(long userId) {
 		return userRepo.findOne(userId);
 	}

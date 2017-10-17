@@ -3,18 +3,15 @@ package org.jz.marketplace.data;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 public class Bid {
 
 	@Id	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -83,6 +80,13 @@ public class Bid {
 		this.bidDateTime = bidDateTime;
 	}
 	
+
+	@Override
+	public String toString() {
+		return "Bid [bidId=" + bidId + ", projectId=" + project.getProjectId() + ", buyerId=" + buyer.getUserId() + ", amount=" + amount
+				+ ", bidDateTime=" + bidDateTime + "]";
+	}
+
 
 	public static class BidBuilder {
 		

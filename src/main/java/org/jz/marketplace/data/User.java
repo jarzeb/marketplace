@@ -54,6 +54,13 @@ public class User {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", isBuyer=" + isBuyer + ", isSeller=" + isSeller
+				+ "]";
+	}
+
+
 	public static class UserBuilder {
 		
 		private User user;

@@ -1,8 +1,10 @@
-package org.jz.marketplace;
+package org.jz.marketplace.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jz.marketplace.data.Bid;
 import org.jz.marketplace.data.Bid.BidBuilder;
@@ -13,13 +15,11 @@ import org.jz.marketplace.data.ProjectRepository;
 import org.jz.marketplace.data.User;
 import org.jz.marketplace.data.User.UserBuilder;
 import org.jz.marketplace.data.UserRepository;
-import org.jz.marketplace.service.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SampleData {
+public class SampleDataService {
 	
 	private static List<User> initialUsers;
 	private static List<Project> initialProjects;
@@ -32,15 +32,23 @@ public class SampleData {
 	@Autowired
 	private UserRepository userRepo;
 	
+	private boolean loaded;
+		
+	public Map<String,String> loadSampleData() {
+		Map<String,String> result = new HashMap<>();
+		if(loaded) {
+			result.put("error", "sample data already loaded");
+		} else {
+			userRepo.save(getUsers());
+			projectRepo.save(getProjects());
+			for(Bid b : getBids())
+				bidService.createBid(b);
+			
+			result.put("info","finished loading sample data");
+			loaded = true;
+		}
+		return result;
 
-	@Bean
-	public Void loadSampleData() {
-		userRepo.save(getUsers());
-		projectRepo.save(getProjects());
-		for(Bid b : getBids())
-			bidService.createBid(b);
-
-		return null;
 	}
 	
 	public static List<User> getUsers() {

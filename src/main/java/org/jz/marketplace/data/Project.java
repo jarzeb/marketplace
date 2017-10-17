@@ -45,7 +45,7 @@ public class Project {
 	
 	
 	public Project() {}
-		
+	
 	public long getProjectId() {
 		return projectId;
 	}
@@ -110,6 +110,13 @@ public class Project {
 		this.lowestBid = lowestBid;
 	}
 	
+	@Override
+	public String toString() {
+		return "Project [projectId=" + projectId + ", sellerId=" + seller.getUserId() + ", description=" + description
+				+ ", billingType=" + billingType + ", startingAmount=" + startingAmount + ", deadline=" + deadline
+				+ ", projectDateTime=" + projectDateTime + ", lowestBid=" + lowestBid.getAmount() + "]";
+	}
+
 
 	public static class ProjectBuilder {
 		

@@ -12,4 +12,7 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 
 	List<Project> findTop100ProjectsBySellerOrderByDeadlineDesc(@Param("seller") User seller);
 	List<Project> findTop100ProjectsByOrderByDeadlineDesc();
+	
+	// used for archiving old projects
+	List<Project> findTop100ProjectsByOrderByDeadlineAsc();
 }

@@ -12,7 +12,7 @@ public class DataConnectorBean implements DataConnector {
 	private ProjectRepository projectRepository;
 	@Autowired
 	private UserRepository userRepository;
-
+	
 	
 	public BidRepository getBidRepository() {
 		return bidRepository;
@@ -25,5 +25,6 @@ public class DataConnectorBean implements DataConnector {
 	public UserRepository getUserRepository() {
 		return userRepository;
 	}
-
+	
+	
 }
