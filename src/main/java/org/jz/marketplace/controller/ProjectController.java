@@ -20,6 +20,20 @@ public class ProjectController {
 	@Autowired
 	private ProjectService projectService;
 
+	@RequestMapping(value = "/createProject", method = RequestMethod.POST)
+	public ResponseEntity<Map<String,String>> createProject(@RequestBody Project project) {
+		Map<String,String> result = projectService.createProject(project);
+		
+		HttpStatus httpStatus = result.containsKey("error") ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
+		return new ResponseEntity<Map<String,String>>(result, httpStatus);
+	}
+
+	@RequestMapping(value = "/projectDetail", method = RequestMethod.GET)
+	public Map<String,Object> getProjectDetail(@Param("projectId") long projectId) {
+		Map<String,Object> result = projectService.getProjectDetail(projectId);
+		return result;
+	}
+
 	@RequestMapping(value = "/projectList", method = RequestMethod.GET)
 	public List<Map<String,String>> projectList() {
 		List<Map<String,String>> result = projectService.getProjectList(null);
@@ -31,19 +45,5 @@ public class ProjectController {
 		List<Map<String,String>> result = projectService.getProjectList(sellerId);
 		return result;
 	}	
-	
-	@RequestMapping(value = "/projectDetail", method = RequestMethod.GET)
-	public Map<String,Object> getProjectDetail(@Param("projectId") long projectId) {
-		Map<String,Object> result = projectService.getProjectDetail(projectId);
-		return result;
-	}
-	
-	@RequestMapping(value = "/createProject", method = RequestMethod.POST)
-	public ResponseEntity<Map<String,String>> createProject(@RequestBody Project project) {
-		Map<String,String> result = projectService.createProject(project);
 		
-		HttpStatus httpStatus = result.containsKey("error") ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
-		return new ResponseEntity<Map<String,String>>(result, httpStatus);
-	}
-
 }

@@ -35,6 +35,10 @@ public class Project {
 	
 	@NotNull
 	private LocalDateTime deadline;
+	
+	@NotNull
+	private LocalDateTime projectDateTime;
+
 
 	@OneToOne
 	private Bid lowestBid;
@@ -90,6 +94,14 @@ public class Project {
 		this.deadline = deadline;
 	}
 
+	public LocalDateTime getProjectDateTime() {
+		return projectDateTime;
+	}
+
+	public void setProjectDateTime(LocalDateTime projectDateTime) {
+		this.projectDateTime = projectDateTime;
+	}
+
 	public Bid getLowestBid() {
 		return lowestBid;
 	}
@@ -110,6 +122,7 @@ public class Project {
 		public ProjectBuilder billingType(BillingType billingType) { this.project.setBillingType(billingType); return this; }
 		public ProjectBuilder startingAmount(Integer startingAmount) 	{ this.project.setStartingAmount(startingAmount); return this; }
 		public ProjectBuilder deadline(LocalDateTime deadline) { this.project.setDeadline(deadline); return this; }
+		public ProjectBuilder projectDateTime(LocalDateTime projectDateTime) { this.project.setProjectDateTime(projectDateTime); return this; }
 		public ProjectBuilder lowestBid(Bid lowestBid) 		{ this.project.setLowestBid(lowestBid); return this; }
 		
 		public Project build() { return project; }

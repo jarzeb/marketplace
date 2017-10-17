@@ -9,6 +9,7 @@ import org.jz.marketplace.data.Project;
 
 public class ProjectFormatter {
 	
+	// Return Project data in a client-friendly format 
 	public static Map<String,String> format(Project project, LocalDateTime currentDateTime) {
 		Map<String,String> row = new HashMap<>();
 		

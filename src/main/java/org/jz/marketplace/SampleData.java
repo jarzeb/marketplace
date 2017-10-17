@@ -73,22 +73,22 @@ public class SampleData {
 		
 		User[] s = { getUsers().get(0), getUsers().get(1), getUsers().get(2), getUsers().get(3) };
 		
-		LocalDateTime deadline = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now();
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(deadline.plusSeconds(5)).seller(s[0])
-				.startingAmount(10000).description("Paint my house.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(now.plusSeconds(5)).seller(s[0])
+				.projectDateTime(now).startingAmount(10000).description("Paint my house.").build());
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(deadline.plusDays(1)).seller(s[0])
-				.startingAmount(9000).description("Cut the grass.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(now.plusDays(1)).seller(s[0])
+				.projectDateTime(now).startingAmount(9000).description("Cut the grass.").build());
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(deadline.plusDays(2)).seller(s[1])
-				.startingAmount(8000).description("Do my dishes.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(now.plusDays(2)).seller(s[1])
+				.projectDateTime(now).startingAmount(8000).description("Do my dishes.").build());
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(deadline.plusDays(3)).seller(s[2])
-				.description("Wash my car.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(now.plusDays(3)).seller(s[2])
+				.projectDateTime(now).description("Wash my car.").build());
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(deadline.plusDays(4)).seller(s[3])
-				.description("Clean the kitchen.").build());
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(now.plusDays(4)).seller(s[3])
+				.projectDateTime(now).description("Clean the kitchen.").build());
 
 		return initialProjects;
 	}

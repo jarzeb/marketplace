@@ -80,6 +80,7 @@ public class ProjectService {
 		
 		User seller = userRepo.findOne(project.getSeller().getUserId());
 		project.setSeller(seller);
+		project.setProjectDateTime(currentDateTime);
 		
 		if(seller == null) {
 			result.put("error", "user not found");
@@ -87,7 +88,7 @@ public class ProjectService {
 			result.put("error", "user is not a seller");
 		} else if(project.getStartingAmount() != null && project.getStartingAmount() < 1) {
 			result.put("error", "starting amount must be either blank or >= $1");
-		} else if(currentDateTime.isAfter(project.getDeadline())) {
+		} else if(project.getProjectDateTime().isAfter(project.getDeadline())) {
 			result.put("error",  "deadline cannot be in the past");
 		}
 		
