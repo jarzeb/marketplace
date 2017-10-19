@@ -114,7 +114,7 @@ public class Project {
 	public String toString() {
 		return "Project [projectId=" + projectId + ", sellerId=" + seller.getUserId() + ", description=" + description
 				+ ", billingType=" + billingType + ", startingAmount=" + startingAmount + ", deadline=" + deadline
-				+ ", projectDateTime=" + projectDateTime + ", lowestBid=" + lowestBid.getAmount() + "]";
+				+ ", projectDateTime=" + projectDateTime + ", lowestBid=" + (lowestBid==null?"null":lowestBid.getAmount()) + "]";
 	}
 
 

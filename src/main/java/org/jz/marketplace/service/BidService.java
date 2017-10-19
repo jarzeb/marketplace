@@ -72,7 +72,7 @@ public class BidService {
 			Bid lowestBid = p.getLowestBid();
 			row.put("bidId", String.valueOf(b.getBidId()));
 			row.put("buyerName", b.getBuyer().getUsername());
-			row.put("bidDateTime", b.getBidDateTime().toString());
+			row.put("bidDateTime", b.getBidDateTime().format(ProjectFormatter.DT_FORMAT));
 			row.put("amount", "$" + String.valueOf(b.getAmount()));
 			row.put("isLowestBid", b.equals(lowestBid) ? "true" : "false");
 			Map<String,String> projectRow = ProjectFormatter.format(p, currentDateTime);

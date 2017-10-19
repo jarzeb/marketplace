@@ -1,6 +1,7 @@
 package org.jz.marketplace.service.formatter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import org.jz.marketplace.data.Project;
 
 public class ProjectFormatter {
 	
+	public static final DateTimeFormatter DT_FORMAT = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
+	
 	// Return Project data in a client-friendly format 
 	public static Map<String,String> format(Project project, LocalDateTime currentDateTime) {
 		Map<String,String> row = new HashMap<>();
@@ -16,7 +19,7 @@ public class ProjectFormatter {
 		row.put("projectId", String.valueOf(project.getProjectId()));
 		row.put("sellerName", project.getSeller().getUsername());
 		row.put("description", project.getDescription());
-		row.put("deadline", project.getDeadline().toString());
+		row.put("deadline", project.getDeadline().format(DT_FORMAT));
 		row.put("billingType", project.getBillingType().name());
 		row.put("startingAmount", project.getStartingAmount()==null ? "" : "$" + String.valueOf(project.getStartingAmount()));
 		

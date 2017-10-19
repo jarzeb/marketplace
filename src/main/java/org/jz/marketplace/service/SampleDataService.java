@@ -81,9 +81,9 @@ public class SampleDataService {
 		
 		User[] s = { getUsers().get(0), getUsers().get(1), getUsers().get(2), getUsers().get(3) };
 		
-		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now().plusSeconds(5);
 
-		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(now.plusSeconds(5)).seller(s[0])
+		initialProjects.add(new ProjectBuilder().billingType(BillingType.FIXED).deadline(now).seller(s[0])
 				.projectDateTime(now).startingAmount(10000).description("Paint my house.").build());
 
 		initialProjects.add(new ProjectBuilder().billingType(BillingType.HOURLY).deadline(now.plusDays(1)).seller(s[0])
