@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jz.marketplace.data.Bid;
-import org.jz.marketplace.data.Project;
+import org.jz.marketplace.model.Bid;
+import org.jz.marketplace.model.Project;
 
 public class ProjectFormatter {
 	

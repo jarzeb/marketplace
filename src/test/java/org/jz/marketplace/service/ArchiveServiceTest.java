@@ -10,16 +10,17 @@ import java.util.Map;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.jz.marketplace.data.Bid;
-import org.jz.marketplace.data.Bid.BidBuilder;
-import org.jz.marketplace.data.BidRepository;
-import org.jz.marketplace.data.DataConnector;
-import org.jz.marketplace.data.Project;
-import org.jz.marketplace.data.Project.BillingType;
-import org.jz.marketplace.data.Project.ProjectBuilder;
-import org.jz.marketplace.data.ProjectRepository;
-import org.jz.marketplace.data.User;
-import org.jz.marketplace.data.User.UserBuilder;
+import org.jz.marketplace.adminservice.ArchiveService;
+import org.jz.marketplace.dao.DataConnector;
+import org.jz.marketplace.model.Bid;
+import org.jz.marketplace.model.Project;
+import org.jz.marketplace.model.User;
+import org.jz.marketplace.model.Bid.BidBuilder;
+import org.jz.marketplace.model.Project.BillingType;
+import org.jz.marketplace.model.Project.ProjectBuilder;
+import org.jz.marketplace.model.User.UserBuilder;
+import org.jz.marketplace.repository.BidRepository;
+import org.jz.marketplace.repository.ProjectRepository;
 
 public class ArchiveServiceTest {
 

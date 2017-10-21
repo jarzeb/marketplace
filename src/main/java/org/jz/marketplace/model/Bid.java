@@ -1,4 +1,4 @@
-package org.jz.marketplace.data;
+package org.jz.marketplace.model;
 
 import java.time.LocalDateTime;
 

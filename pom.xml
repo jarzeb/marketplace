@@ -7,6 +7,7 @@
 	<groupId>org.jz</groupId>
 	<artifactId>marketplace</artifactId>
 	<version>0.1.0</version>
+	<packaging>war</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -58,7 +59,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+		<plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-war-plugin</artifactId>
+        	<configuration>
+          		<webappDirectory>src/main/webapp</webappDirectory>
+        	</configuration>
+      	</plugin>
+      </plugins>
 	</build>
 
 	<repositories>

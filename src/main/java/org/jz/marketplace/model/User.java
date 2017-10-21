@@ -1,4 +1,4 @@
-package org.jz.marketplace.data;
+package org.jz.marketplace.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

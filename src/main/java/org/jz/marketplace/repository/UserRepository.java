@@ -1,7 +1,8 @@
-package org.jz.marketplace.data;
+package org.jz.marketplace.repository;
 
 import java.util.List;
 
+import org.jz.marketplace.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

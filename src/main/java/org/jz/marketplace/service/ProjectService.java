@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jz.marketplace.data.Bid;
-import org.jz.marketplace.data.BidRepository;
-import org.jz.marketplace.data.DataConnector;
-import org.jz.marketplace.data.Project;
-import org.jz.marketplace.data.ProjectRepository;
-import org.jz.marketplace.data.User;
-import org.jz.marketplace.data.UserRepository;
+import org.jz.marketplace.dao.DataConnector;
+import org.jz.marketplace.model.Bid;
+import org.jz.marketplace.model.Project;
+import org.jz.marketplace.model.User;
+import org.jz.marketplace.repository.BidRepository;
+import org.jz.marketplace.repository.ProjectRepository;
+import org.jz.marketplace.repository.UserRepository;
 import org.jz.marketplace.service.formatter.ProjectFormatter;
 import org.springframework.stereotype.Component;
 
@@ -29,25 +29,21 @@ public class ProjectService {
 		userRepo = dataConnector.getUserRepository();
 	}
 	
-	public List<Map<String,String>> getProjectList(Long sellerId) {
+	public List<Map<String,String>> getProjectListByBuyer(long buyerId) {
+		User buyer = userRepo.findOne(buyerId);
+		List<Project> projectList = projectRepo.findTop100ProjectsByLowestBidBuyerOrderByDeadlineDesc(buyer);
+		return formatProjectList(projectList);		
+	}
 	
-		List<Project> projectList = null;
-		if(sellerId == null) {
-			projectList = projectRepo.findTop100ProjectsByOrderByDeadlineDesc();
-		} else {
-			User seller = userRepo.findOne(sellerId);
-			projectList = projectRepo.findTop100ProjectsBySellerOrderByDeadlineDesc(seller);
-		}
-		
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		List<Map<String,String>> result = new ArrayList<>();
-
-		for(Project project : projectList) {
-			Map<String,String> row = ProjectFormatter.format(project,  currentDateTime);
-			result.add(row);
-		}
-		
-		return result;
+	public List<Map<String,String>> getProjectListBySeller(long sellerId) {
+		User seller = userRepo.findOne(sellerId);
+		List<Project> projectList = projectRepo.findTop100ProjectsBySellerOrderByDeadlineDesc(seller);
+		return formatProjectList(projectList);
+	}
+	
+	public List<Map<String,String>> getProjectList() {
+		List<Project> projectList = projectRepo.findTop100ProjectsByOrderByDeadlineDesc();
+		return formatProjectList(projectList);
 	}	
 	
 	public Map<String,Object> getProjectDetail(long projectId) {
@@ -56,7 +52,7 @@ public class ProjectService {
 		List<Bid> bids = bidRepo.findTop100BidsByProjectOrderByBidDateTimeAsc(project);
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
-		Map<String,String> p = ProjectFormatter.format(project, currentDateTime);
+		Map<String,String> formattedProject = ProjectFormatter.format(project, currentDateTime);
 		
 		List<Map<String,String>> bidList = new ArrayList<>();
 		for(Bid b : bids) {
@@ -67,7 +63,7 @@ public class ProjectService {
 			bidList.add(bidMap);
 		}
 		Map<String, Object> result = new HashMap<>();
-		result.put("project", p);
+		result.put("project", formattedProject);
 		result.put("bids", bidList);
 		
 		return result;
@@ -99,6 +95,18 @@ public class ProjectService {
 		projectRepo.save(project);
 		
 		result.put("result", "true");
+		return result;
+	}
+	
+	private List<Map<String,String>> formatProjectList(List<Project> projectList) {
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		List<Map<String,String>> result = new ArrayList<>();
+
+		for(Project project : projectList) {
+			Map<String,String> row = ProjectFormatter.format(project,  currentDateTime);
+			result.add(row);
+		}
+
 		return result;
 	}
 

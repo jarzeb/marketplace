@@ -2,10 +2,12 @@ package org.jz.marketplace.controller;
 
 import java.util.List;
 
-import org.jz.marketplace.data.User;
+import org.jz.marketplace.model.User;
 import org.jz.marketplace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,18 +20,21 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
-	public User createUser(@RequestBody User user) {
-		return userService.createUser(user);
+	public ResponseEntity<User> createUser(@RequestBody User user) {
+		User result = userService.createUser(user);
+		return new ResponseEntity<User>(result, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/getFirst10Users", method = RequestMethod.GET)
-	public List<User> getUsers() {
-		return userService.getFirst10Users();
+	public ResponseEntity<List<User>> getUsers() {
+		List<User> result = userService.getFirst10Users();
+		return new ResponseEntity<List<User>>(result, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
-	public User getUser(@Param("userId") long userId) {
-		return userService.getUser(userId);
+	public ResponseEntity<User> getUser(@Param("userId") long userId) {
+		User result = userService.getUser(userId);
+		return new ResponseEntity<User>(result, HttpStatus.OK);
 	}
 	
 }

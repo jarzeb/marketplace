@@ -2,9 +2,9 @@ package org.jz.marketplace.service;
 
 import java.util.List;
 
-import org.jz.marketplace.data.DataConnector;
-import org.jz.marketplace.data.User;
-import org.jz.marketplace.data.UserRepository;
+import org.jz.marketplace.dao.DataConnector;
+import org.jz.marketplace.model.User;
+import org.jz.marketplace.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component

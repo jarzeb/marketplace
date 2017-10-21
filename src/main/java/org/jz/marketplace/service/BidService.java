@@ -8,13 +8,13 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
-import org.jz.marketplace.data.Bid;
-import org.jz.marketplace.data.BidRepository;
-import org.jz.marketplace.data.DataConnector;
-import org.jz.marketplace.data.Project;
-import org.jz.marketplace.data.ProjectRepository;
-import org.jz.marketplace.data.User;
-import org.jz.marketplace.data.UserRepository;
+import org.jz.marketplace.dao.DataConnector;
+import org.jz.marketplace.model.Bid;
+import org.jz.marketplace.model.Project;
+import org.jz.marketplace.model.User;
+import org.jz.marketplace.repository.BidRepository;
+import org.jz.marketplace.repository.ProjectRepository;
+import org.jz.marketplace.repository.UserRepository;
 import org.jz.marketplace.service.formatter.ProjectFormatter;
 import org.springframework.stereotype.Component;
 

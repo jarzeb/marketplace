@@ -1,5 +1,8 @@
-package org.jz.marketplace.data;
+package org.jz.marketplace.dao;
 
+import org.jz.marketplace.repository.BidRepository;
+import org.jz.marketplace.repository.ProjectRepository;
+import org.jz.marketplace.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

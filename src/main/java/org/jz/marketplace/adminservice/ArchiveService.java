@@ -1,4 +1,4 @@
-package org.jz.marketplace.service;
+package org.jz.marketplace.adminservice;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -9,11 +9,11 @@ import javax.transaction.Transactional;
 
 import org.jz.marketplace.archiver.Archiver;
 import org.jz.marketplace.archiver.ArchiverFactory;
-import org.jz.marketplace.data.Bid;
-import org.jz.marketplace.data.BidRepository;
-import org.jz.marketplace.data.DataConnector;
-import org.jz.marketplace.data.Project;
-import org.jz.marketplace.data.ProjectRepository;
+import org.jz.marketplace.dao.DataConnector;
+import org.jz.marketplace.model.Bid;
+import org.jz.marketplace.model.Project;
+import org.jz.marketplace.repository.BidRepository;
+import org.jz.marketplace.repository.ProjectRepository;
 import org.springframework.stereotype.Component;
 
 @Component
