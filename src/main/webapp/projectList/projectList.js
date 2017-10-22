@@ -11,8 +11,10 @@ app.config(['$routeProvider', function($routeProvider) {
 
 app.controller('ProjectListCtrl', ['$scope', '$http', '$location', '$routeParams', 'shared', function($scope, $http, $location, $routeParams, shared) {
 
-	if($location.search().filter == 'true') {
+	if($location.search().filter == 'seller') {
 		$scope.url = '/projectListBySeller?sellerId=' + shared.getSharedVariable('userId');
+	} else if ($location.search().filter == 'buyer') {
+		$scope.url = '/projectListByBuyer?buyerId=' + shared.getSharedVariable('userId');
 	} else {
 		$scope.url = '/projectList';
 	}

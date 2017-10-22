@@ -1,4 +1,4 @@
-package org.jz.marketplace.service;
+package org.jz.marketplace.adminservice;
 
 import static org.junit.Assert.assertEquals;
 
@@ -47,9 +47,11 @@ public class ArchiveServiceTest {
 				.description("Test Project").projectDateTime(LocalDateTime.now()).seller(testSeller).build();
 		projectList.add(p);
 		
-		Bid b = new BidBuilder().amount(100).bidDateTime(LocalDateTime.now()).buyer(testBuyer).project(p).build();
+		Bid b1 = new BidBuilder().amount(100).bidDateTime(LocalDateTime.now()).buyer(testBuyer).project(p).build();
+		Bid b2 = new BidBuilder().amount(50).bidDateTime(LocalDateTime.now()).buyer(testBuyer).project(p).build();
 		bidList = new ArrayList<>();
-		bidList.add(b);		
+		bidList.add(b1);
+		bidList.add(b2);
 
 		EasyMock.expect(mockProjectRepo.findTop100ProjectsByOrderByDeadlineAsc()).andReturn(projectList);
 		EasyMock.expect(mockBidRepo.findBidsByProject(p)).andReturn(bidList);
@@ -57,7 +59,6 @@ public class ArchiveServiceTest {
 		EasyMock.replay(mockDataConnector);
 		EasyMock.replay(mockBidRepo);
 		EasyMock.replay(mockProjectRepo);
-
 	}
 	
 	@Test
@@ -66,7 +67,7 @@ public class ArchiveServiceTest {
 		ArchiveService archiveService = new ArchiveService(mockDataConnector);
 		Map<String,String> result = archiveService.archiveCompletedProjects();
 		
-		assertEquals("1", result.get("bidsArchived"));
+		assertEquals("2", result.get("bidsArchived"));
 		assertEquals("1", result.get("projectsArchived"));
 	}
 }

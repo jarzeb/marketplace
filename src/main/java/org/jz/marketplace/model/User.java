@@ -67,6 +67,7 @@ public class User {
 		
 		public UserBuilder() { user = new User(); }
 		
+		public UserBuilder userId(long userId)			{ this.user.setUserId(userId); return this; }
 		public UserBuilder username(String username) 	{ this.user.setUsername(username); return this; }
 		public UserBuilder isBuyer(boolean isBuyer) 	{ this.user.setBuyer(isBuyer); return this; }
 		public UserBuilder isSeller(boolean isSeller) 	{ this.user.setSeller(isSeller); return this; }

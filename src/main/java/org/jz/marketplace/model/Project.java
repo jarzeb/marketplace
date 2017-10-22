@@ -124,6 +124,7 @@ public class Project {
 		
 		public ProjectBuilder() { project = new Project(); }
 		
+		public ProjectBuilder projectId(long projectId)		{ this.project.setProjectId(projectId); return this; }
 		public ProjectBuilder seller(User seller) 			{ this.project.setSeller(seller); return this; }
 		public ProjectBuilder description(String description) 	{ this.project.setDescription(description); return this; }
 		public ProjectBuilder billingType(BillingType billingType) { this.project.setBillingType(billingType); return this; }

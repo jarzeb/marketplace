@@ -93,7 +93,8 @@ public class Bid {
 		private Bid bid;
 		
 		public BidBuilder() { bid = new Bid(); }
-		
+
+		public BidBuilder bidId(long bidId)				{ this.bid.setBidId(bidId); return this; }
 		public BidBuilder project(Project project) 		{ this.bid.setProject(project); return this; }
 		public BidBuilder buyer(User buyer) 			{ this.bid.setBuyer(buyer); return this; }
 		public BidBuilder amount(int amount) 			{ this.bid.setAmount(amount); return this; }

@@ -22,19 +22,22 @@ public class UserController {
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		User result = userService.createUser(user);
-		return new ResponseEntity<User>(result, HttpStatus.CREATED);
+		HttpStatus httpStatus = (result == null) ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED;
+		return new ResponseEntity<User>(result, httpStatus);
 	}
 
 	@RequestMapping(value = "/getFirst10Users", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getUsers() {
 		List<User> result = userService.getFirst10Users();
-		return new ResponseEntity<List<User>>(result, HttpStatus.OK);
+		HttpStatus httpStatus = (result == null) ? HttpStatus.BAD_REQUEST : HttpStatus.OK;
+		return new ResponseEntity<List<User>>(result, httpStatus);
 	}
 
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
 	public ResponseEntity<User> getUser(@Param("userId") long userId) {
 		User result = userService.getUser(userId);
-		return new ResponseEntity<User>(result, HttpStatus.OK);
+		HttpStatus httpStatus = (result == null) ? HttpStatus.BAD_REQUEST : HttpStatus.OK;
+		return new ResponseEntity<User>(result, httpStatus);
 	}
 	
 }

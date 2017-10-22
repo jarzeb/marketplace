@@ -23,6 +23,12 @@ public class ProjectService {
 	private ProjectRepository projectRepo;
 	private UserRepository userRepo;
 	
+	public static final String ERROR_KEY = "error";
+	public static final String ERR_USER_NOT_FOUND = "user not found";
+	public static final String ERR_USER_NOT_SELLER = "user does not have seller status";
+	public static final String ERR_STARTING_AMOUNT_MUST_BE_BLANK_OR_GE_1 = "starting amount must be either blank or >= $1";
+	public static final String ERR_DEADLINE_CANNOT_BE_IN_PAST = "deadline cannot be in the past";
+	
 	public ProjectService(DataConnector dataConnector) {
 		bidRepo = dataConnector.getBidRepository();
 		projectRepo = dataConnector.getProjectRepository();
@@ -74,27 +80,27 @@ public class ProjectService {
 		Map<String,String> result = new HashMap<>();
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
-		User seller = userRepo.findOne(project.getSeller().getUserId());
+		User seller = (project.getSeller() == null) 
+				? null : userRepo.findOne(project.getSeller().getUserId());
+
 		project.setSeller(seller);
 		project.setProjectDateTime(currentDateTime);
 		
 		if(seller == null) {
-			result.put("error", "user not found");
+			result.put(ERROR_KEY, ERR_USER_NOT_FOUND);
 		} else if(!seller.isSeller()) {
-			result.put("error", "user is not a seller");
+			result.put(ERROR_KEY, ERR_USER_NOT_SELLER);
 		} else if(project.getStartingAmount() != null && project.getStartingAmount() < 1) {
-			result.put("error", "starting amount must be either blank or >= $1");
+			result.put(ERROR_KEY, ERR_STARTING_AMOUNT_MUST_BE_BLANK_OR_GE_1);
 		} else if(project.getProjectDateTime().isAfter(project.getDeadline())) {
-			result.put("error",  "deadline cannot be in the past");
+			result.put(ERROR_KEY, ERR_DEADLINE_CANNOT_BE_IN_PAST);
 		}
 		
 		if(result.size() > 0) {
 			return result;
 		}
-
 		projectRepo.save(project);
 		
-		result.put("result", "true");
 		return result;
 	}
 	

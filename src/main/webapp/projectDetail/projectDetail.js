@@ -29,14 +29,13 @@ app.controller('ProjectDetailCtrl', ['$scope', '$http', '$route', 'shared', func
 
 		$http.post('/createBid', payload).
 		then(function(response) {
-			if(response.data.result == 'true') {
 				alert('bid accepted');
-			} else {
+				$route.reload();
+			},
+			function(response) {
 				alert(response.data.error);
-			}
-			$route.reload();
+				$route.reload();
 		});
-
 	};
 	
 }]);

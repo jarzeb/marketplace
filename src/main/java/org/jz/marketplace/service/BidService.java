@@ -25,6 +25,17 @@ public class BidService {
 	private ProjectRepository projectRepo;
 	private UserRepository userRepo;
 	
+	public static final String ERROR_KEY = "error";
+	public static final String ERR_BID_NOT_FOUND = "project not found";
+	public static final String ERR_PROJECT_NOT_FOUND = "project not found";
+	public static final String ERR_PROJECT_DEADLINE_PASSED = "project deadline has passed";
+	public static final String ERR_BUYER_NOT_FOUND = "buyer not found";
+	public static final String ERR_BUYER_SAME_AS_SELLER = "buyer cannot be same user as seller";
+	public static final String ERR_USER_IS_NOT_BUYER = "user does not have buyer status";
+	public static final String ERR_BID_AMOUNT_MUST_BE_GT_ZERO = "bid must be greater than $0";
+	public static final String ERR_BID_MUST_BE_LT_CURRENT_BID = "bid must be less than the current lowest bid";
+	public static final String ERR_BID_MUST_BE_LE_STARTING_BID = "bid must be less than or equal to the starting bid";
+	
 	public BidService(DataConnector dataConnector) {
 		bidRepo = dataConnector.getBidRepository();
 		projectRepo = dataConnector.getProjectRepository();
@@ -83,32 +94,33 @@ public class BidService {
 		return result;
 	}
 	
-	private Map<String,String> validateBid(Bid bid, Bid lowestBid, Map<String,String> result) {
+	protected Map<String,String> validateBid(Bid bid, Bid lowestBid, Map<String,String> result) {
 		String error = null;
-		Project project = bid.getProject();
-		User buyer = bid.getBuyer();
+		Project project = (bid == null) ? null : bid.getProject();
+		User buyer = (bid == null) ? null : bid.getBuyer();
 		
-		if(project == null) {
-			error = "project not found";
-		} else if(buyer == null) {
-			error = "buyer not found";
+		if(bid == null) {
+			error = ERR_BID_NOT_FOUND;
+		} else if(project == null) {
+			error = ERR_PROJECT_NOT_FOUND;
 		} else if(bid.getBidDateTime().isAfter(project.getDeadline())) {
-			error = "project deadline has passed";
+			error = ERR_PROJECT_DEADLINE_PASSED;
+		} else if(buyer == null) {
+			error = ERR_BUYER_NOT_FOUND;
 		} else if(buyer.equals(project.getSeller())) {
-			error = "buyer cannot be same user as seller";
+			error = ERR_BUYER_SAME_AS_SELLER;
 		} else if(!buyer.isBuyer()) {
-			error = "user does not have buyer status";
+			error = ERR_USER_IS_NOT_BUYER;
 		} else if(bid.getAmount() <= 0) {
-			error = "bid must be greater than $0";
+			error = ERR_BID_AMOUNT_MUST_BE_GT_ZERO;
 		} else if(lowestBid != null && lowestBid.getAmount() <= bid.getAmount()) {
-			error = "bid must be less than the current lowest bid";
+			error = ERR_BID_MUST_BE_LT_CURRENT_BID;
 		} else if(project.getStartingAmount() != null && bid.getAmount() > project.getStartingAmount()) {
-			error = "bid must be less than or equal to the starting bid";
+			error = ERR_BID_MUST_BE_LE_STARTING_BID;
 		}
 		
 		if(error != null) {
-			result.put("error", error);
-			result.put("result", "false");
+			result.put(ERROR_KEY, error);
 		}
 		
 		return result;
