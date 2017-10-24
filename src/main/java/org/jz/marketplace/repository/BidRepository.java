@@ -7,10 +7,10 @@ import org.jz.marketplace.model.Project;
 import org.jz.marketplace.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 //@RepositoryRestResource(collectionResourceRel = "bids", path = "bids")
-@Repository
+@RepositoryRestResource(exported = false)
 public interface BidRepository extends CrudRepository<Bid, Long> {
 
 	List<Bid> findTop100BidsByBuyerOrderByBidDateTimeAsc(@Param("buyer") User buyer);
