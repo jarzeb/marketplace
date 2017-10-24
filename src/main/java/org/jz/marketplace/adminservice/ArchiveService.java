@@ -63,21 +63,29 @@ public class ArchiveService {
 
 	
 	@Transactional
-	private int archiveBidsAndProject(List<Bid> bids, Project p) {		
+	private int archiveBidsAndProject(List<Bid> bids, Project project) {		
 		int bidCount = 0;
 
 		// archive the Bids
 		if(bids != null && !bids.isEmpty()) { 
 			for(Bid b : bids) {
-				archiver.archive(b.toString());
+				archiver.archive(b);
 			}
-			bidRepo.delete(bids);
 			bidCount = bids.size();
 		}
 		
 		// archive the Project
-		archiver.archive(p.toString());
-		projectRepo.delete(p);
+		archiver.archive(project);
+
+		// Remove Project reference to lowestBid so Bids can be deleted
+		if(project.getLowestBid() != null) {
+			project.setLowestBid(null);
+			projectRepo.save(project);
+		}
+
+		// delete the original data
+		bidRepo.delete(bids);
+		projectRepo.delete(project);
 		
 		return bidCount;
 	}

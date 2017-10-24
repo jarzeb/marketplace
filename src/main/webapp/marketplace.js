@@ -24,7 +24,7 @@ app.controller('UserController', ['$scope', '$http', '$location', '$route', 'sha
 	this.myDate = new Date();
 	this.isOpen = false;
 
-	$http.get('/getFirst10Users').
+	$http.get('/getFirst25Users').
     then(function(response) {
         $scope.users = response.data;
         angular.forEach($scope.users, function(user) {
@@ -37,7 +37,6 @@ app.controller('UserController', ['$scope', '$http', '$location', '$route', 'sha
 	$scope.updateUser = function() {
 		shared.setVariable('userId', $scope.selectedUser);
 		$route.reload();
-		//$location.path("/");
 	};
 	
 }]);
