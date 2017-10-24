@@ -73,7 +73,7 @@ public class ProjectServiceTest {
 	
 	@Test
 	public void testCreateProjectWithUserIsNotSeller() {
-		project.getSeller().setSeller(false);
+		project.getSeller().setIsSeller(false);
 		
 		Map<String,String> result = projectService.createProject(project);
 		assertEquals(ProjectService.ERR_USER_NOT_SELLER, result.get(ProjectService.ERROR_KEY));		

@@ -17,7 +17,12 @@ app.controller('PostProjectCtrl', ['$scope', '$http', '$route', '$location', 'sh
 	$scope.createProject = function() {
 		$scope.userId = shared.getSharedVariable('userId');
 		var d = $scope.deadlineDate;
-		var dateStr = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + "T";
+		var monthStr = "" + (d.getMonth() + 1);
+		if(monthStr.length < 2) monthStr = "0" + monthStr;
+		var dayStr = "" + d.getDate();
+		if(dayStr.length < 2) dayStr = "0" + dayStr;
+		
+		var dateStr = d.getFullYear() + "-" + monthStr + "-" + dayStr + "T";
 		var timeStr = $scope.deadlineHour + ":" + $scope.deadlineMinute + ":00";
 		var deadlineStr = dateStr + timeStr;
 		
@@ -36,7 +41,7 @@ app.controller('PostProjectCtrl', ['$scope', '$http', '$route', '$location', 'sh
 			$location.path('/projectList');
 		},
 		function(response) {
-			alert('Error - Project not created.');
+			alert(response.data.error);
 		});
 	};
 	

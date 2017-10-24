@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<User, Long> {
 
 	List<User> findByUsername(String username);
-	List<User> findTop10ByOrderByUserId();
+	List<User> findTop25ByOrderByUserId();
 	
 }

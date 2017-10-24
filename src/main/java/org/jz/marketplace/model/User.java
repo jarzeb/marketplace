@@ -33,7 +33,7 @@ public class User {
 		return isBuyer;
 	}
 	
-	public void setBuyer(boolean isBuyer) {
+	public void setIsBuyer(boolean isBuyer) {
 		this.isBuyer = isBuyer;
 	}
 	
@@ -41,7 +41,7 @@ public class User {
 		return isSeller;
 	}
 	
-	public void setSeller(boolean isSeller) {
+	public void setIsSeller(boolean isSeller) {
 		this.isSeller = isSeller;
 	}
 	
@@ -69,8 +69,8 @@ public class User {
 		
 		public UserBuilder userId(long userId)			{ this.user.setUserId(userId); return this; }
 		public UserBuilder username(String username) 	{ this.user.setUsername(username); return this; }
-		public UserBuilder isBuyer(boolean isBuyer) 	{ this.user.setBuyer(isBuyer); return this; }
-		public UserBuilder isSeller(boolean isSeller) 	{ this.user.setSeller(isSeller); return this; }
+		public UserBuilder isBuyer(boolean isBuyer) 	{ this.user.setIsBuyer(isBuyer); return this; }
+		public UserBuilder isSeller(boolean isSeller) 	{ this.user.setIsSeller(isSeller); return this; }
 		
 		public User build() { return user; }
 	}

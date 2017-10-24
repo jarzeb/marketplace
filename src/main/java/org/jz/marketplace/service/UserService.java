@@ -23,8 +23,8 @@ public class UserService {
 		return userRepo.findOne(userId);
 	}
 	
-	public List<User> getFirst10Users() {
-		return userRepo.findTop10ByOrderByUserId();
+	public List<User> getFirst25Users() {
+		return userRepo.findTop25ByOrderByUserId();
 	}
 	
 }

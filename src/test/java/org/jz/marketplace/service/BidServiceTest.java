@@ -86,7 +86,7 @@ public class BidServiceTest {
 	
 	@Test
 	public void testValidateBidWithBuyerSameUserAsSeller() {
-		bid.getProject().getSeller().setBuyer(true);
+		bid.getProject().getSeller().setIsBuyer(true);
 		bid.setBuyer(bid.getProject().getSeller());
 
 		Map<String,String> result = bidService.validateBid(bid, lowestBid, new HashMap<>());
@@ -95,7 +95,7 @@ public class BidServiceTest {
 
 	@Test
 	public void testValidateBidWithUserIsNotBuyer() {
-		bid.getBuyer().setBuyer(false);
+		bid.getBuyer().setIsBuyer(false);
 		
 		Map<String,String> result = bidService.validateBid(bid, lowestBid, new HashMap<>());
 		assertEquals(BidService.ERR_USER_IS_NOT_BUYER, result.get(BidService.ERROR_KEY));

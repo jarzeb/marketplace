@@ -26,9 +26,9 @@ public class UserController {
 		return new ResponseEntity<User>(result, httpStatus);
 	}
 
-	@RequestMapping(value = "/getFirst10Users", method = RequestMethod.GET)
+	@RequestMapping(value = "/getFirst25Users", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getUsers() {
-		List<User> result = userService.getFirst10Users();
+		List<User> result = userService.getFirst25Users();
 		HttpStatus httpStatus = (result == null) ? HttpStatus.BAD_REQUEST : HttpStatus.OK;
 		return new ResponseEntity<List<User>>(result, httpStatus);
 	}

@@ -39,7 +39,6 @@ public class Project {
 	@NotNull
 	private LocalDateTime projectDateTime;
 
-
 	@OneToOne
 	private Bid lowestBid;
 	
